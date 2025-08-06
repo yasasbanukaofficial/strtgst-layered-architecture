@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.strtgst.controller.CalendarPageController">
+   <children>
+      <VBox layoutX="189.0" layoutY="109.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="0.0" prefWidth="1600.0" spacing="200.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="141.0" text="Calendar" textFill="WHITE">
+                     <font>
+                        <Font name="Poppins Bold" size="28.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="86.0" top="51.0" />
+                     </HBox.margin>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+                  <HBox prefHeight="97.0" prefWidth="734.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#showWeekView" prefHeight="31.0" prefWidth="174.0" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-radius: 20px 0px 0px 20px; -fx-border-color: #00ccff; -fx-border-width: 2px;" text="Week View" textFill="WHITE">
+                           <font>
+                              <Font name="Poppins Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#showDayView" prefHeight="31.0" prefWidth="174.0" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: #00ccff; -fx-border-width: 2px;" text="Day View" textFill="WHITE">
+                           <font>
+                              <Font name="Poppins Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#showMonthView" prefHeight="31.0" prefWidth="174.0" style="-fx-background-radius: 20px; -fx-background-color: transparent; -fx-border-color: #00ccff; -fx-border-width: 2px; -fx-border-radius: 0px 20px 20px 0px;" text="Month View" textFill="WHITE">
+                           <font>
+                              <Font name="Poppins Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets left="170.0" top="46.0" />
+                     </padding>
+                  </HBox>
+                  <Label fx:id="labelDate" prefHeight="63.0" prefWidth="154.0" text="May 19" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Poppins Bold" size="44.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="34.0" />
+                     </HBox.margin>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="903.0" prefWidth="1384.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox fx:id="ancAgendaView" prefHeight="385.0" prefWidth="671.0" style="-fx-background-color: white; -fx-border-radius: 25px; -fx-background-radius: 25px;">
+                           <padding>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="25.0" left="86.0" right="20.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox prefHeight="34.0" prefWidth="671.0">
+                           <VBox.margin>
+                              <Insets bottom="25.0" left="86.0" right="20.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="220.0" text="🤖 Entry Bot" textFill="WHITE">
+                                 <font>
+                                    <Font name="Ink Free" size="22.0" />
+                                 </font>
+                                 <effect>
+                                    <Glow />
+                                 </effect>
+                              </Label>
+                              <Label prefHeight="23.0" prefWidth="663.0" text="Add entries with just text." textFill="WHITE">
+                                 <font>
+                                    <Font name="Ink Free" size="22.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="25.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <Glow />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="ancChatBot" prefHeight="380.0" prefWidth="671.0" style="-fx-background-color: transparent; -fx-border-radius: 25px; -fx-background-radius: 25px; -fx-border-color: white;">
+                           <padding>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="86.0" right="20.0" />
+                           </VBox.margin>
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 10px;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox prefHeight="263.0" prefWidth="443.0">
+                                       <children>
+                                          <TextFlow fx:id="txtChatFlow" lineSpacing="5.0" prefHeight="356.0" prefWidth="516.0" stylesheets="@styles/textFlow.css" />
+                                       </children>
+                                    </VBox>
+                                    <StackPane alignment="TOP_RIGHT" prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox accessibleRole="BUTTON" prefHeight="54.0" prefWidth="650.0" style="-fx-background-color: transparent; -fx-background-radius: 25px; -fx-border-radius: 25px;">
+                                 <children>
+                                    <TextField fx:id="txtEnterMsg" prefHeight="54.0" prefWidth="690.0" promptText="I have an Maths exam today at 9am" style="-fx-background-color: transparent; -fx-border-color: #DBDBDB; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: white;" stylesheets="@styles/textField.css" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font name="Ink Free" size="18.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="10.0" right="3.0" />
+                                       </padding>
+                                    </TextField>
+                                    <ImageView fitHeight="29.0" fitWidth="28.0" onMouseClicked="#sendMessage" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/12439274-removebg-preview.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="18.0" top="15.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <VBox.margin>
+                                    <Insets left="7.0" top="7.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children></VBox>
+                  <VBox fx:id="ancTimeline" prefHeight="833.0" prefWidth="1430.0" style="-fx-background-color: white; -fx-border-radius: 25px; -fx-background-radius: 25px;">
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="20.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

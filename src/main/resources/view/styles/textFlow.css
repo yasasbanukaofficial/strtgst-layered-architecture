@@ -1,0 +1,11 @@
+TextFlow {
+    -fx-font-family: Calibri;
+    -fx-font-size: 22px;
+    -fx-text-fill: white;
+    -fx-padding: 6px 10px;
+    -fx-line-spacing: 4px;
+}
+
+Text {
+    -fx-fill: white;
+}

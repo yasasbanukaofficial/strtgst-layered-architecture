@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ancSignUpForm" prefHeight="690.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.strtgst.controller.SignUpController">
+   <children>
+      <VBox fx:id="ancFields" layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="447.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Username" textFill="WHITE">
+               <font>
+                  <Font name="Ink Free" size="25.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUsername" minHeight="-Infinity" prefHeight="60.0" prefWidth="476.0" promptText="grandmaster12" style="-fx-border-color: #00ccff; -fx-background-color: transaparent; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-width: 2px;" stylesheets="@styles/textField.css">
+               <font>
+                  <Font name="Ink Free" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="7.0" />
+               </VBox.margin>
+               <effect>
+                  <Glow />
+               </effect>
+            </TextField>
+            <Label text="Email" textFill="WHITE">
+               <font>
+                  <Font name="Ink Free" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="txtEmail" minHeight="-Infinity" prefHeight="60.0" prefWidth="476.0" promptText="johndoe@gmail.com" style="-fx-border-color: #00ccff; -fx-background-color: transaparent; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-width: 2px;" stylesheets="@styles/textField.css">
+               <font>
+                  <Font name="Ink Free" size="25.0" />
+               </font>
+               <effect>
+                  <Glow />
+               </effect>
+               <VBox.margin>
+                  <Insets top="7.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Password" textFill="WHITE">
+               <font>
+                  <Font name="Ink Free" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="txtPassword" prefHeight="45.0" promptText="john@123" style="-fx-background-color: transparent; -fx-border-color: #00ccff; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-border-width: 2px;">
+               <font>
+                  <Font name="Ink Free" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="7.0" />
+               </VBox.margin>
+            </PasswordField>
+            <Button maxWidth="1201.0" mnemonicParsing="false" onAction="#signUpUser" prefHeight="46.0" prefWidth="1201.0" style="-fx-background-color: transparent; -fx-border-radius: 20px; -fx-background-radius: 20px; -fx-border-color: #26C5F4;" stylesheets="@styles/loginBtn.css" text="🔥 Sign up" textFill="WHITE" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+               <effect>
+                  <Glow />
+               </effect>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

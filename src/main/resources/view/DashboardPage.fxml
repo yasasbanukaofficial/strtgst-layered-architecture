@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane fx:id="ancDashboard" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.strtgst.controller.DashboardPageController">
+   <children>
+      <VBox layoutX="241.0" layoutY="215.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #F2F6transparentFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="599.0">
+               <children>
+                  <Label prefHeight="45.0" prefWidth="303.0" text="DASHBOARD" textFill="WHITE">
+                     <font>
+                        <Font name="Poppins Bold" size="32.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="86.0" top="51.0" />
+                     </HBox.margin>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="182.0" prefWidth="1600.0" spacing="65.0">
+               <children>
+                  <VBox accessibleRole="BUTTON" onMouseClicked="#visitTasksPage" prefHeight="212.0" prefWidth="241.0" style="-fx-background-color: #BBF4D3; -fx-background-radius: 34px; -fx-border-radius: 34px;">
+                     <HBox.margin>
+                        <Insets left="84.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label text="Total Tasks" textFill="#34dd78">
+                           <font>
+                              <Font name="Poppins Bold" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="23.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="labelTotalTasks" prefHeight="93.0" prefWidth="53.0" text="0" textFill="#5fda92">
+                           <font>
+                              <Font name="Poppins Bold" size="86.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="225.0" text="See more ➡" textFill="#34dd78">
+                           <font>
+                              <Font name="Poppins Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="17.0" right="14.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox accessibleRole="BUTTON" onMouseClicked="#visitEventsPage" prefHeight="212.0" prefWidth="251.0" style="-fx-background-color: #FCE4CC; -fx-background-radius: 34px; -fx-border-radius: 34px;">
+                     <children>
+                        <Label text="Events Today" textFill="#eb7a52">
+                           <font>
+                              <Font name="Poppins Bold" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="23.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="labelEventsToday" prefHeight="93.0" prefWidth="53.0" text="0" textFill="#f7a27e">
+                           <font>
+                              <Font name="Poppins Bold" size="86.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="225.0" text="See more ➡" textFill="#eb7a52">
+                           <font>
+                              <Font name="Poppins Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="17.0" right="14.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox accessibleRole="BUTTON" onMouseClicked="#visitAssignmentsPage" prefHeight="212.0" prefWidth="274.0" style="-fx-background-color: #FFD3E2; -fx-background-radius: 34px; -fx-border-radius: 34px;">
+                     <children>
+                        <Label text="Total Assignments" textFill="#f566a6">
+                           <font>
+                              <Font name="Poppins Bold" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="23.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="labelTotalAssignments" prefHeight="93.0" prefWidth="53.0" text="0" textFill="#f79cc2">
+                           <font>
+                              <Font name="Poppins Bold" size="86.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="254.0" text="See more ➡" textFill="#f566a6">
+                           <font>
+                              <Font name="Poppins Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="17.0" right="14.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox accessibleRole="BUTTON" prefHeight="212.0" prefWidth="263.0" style="-fx-background-color: #D4EDEB; -fx-background-radius: 34px; -fx-border-radius: 34px;">
+                     <children>
+                        <Label text="GPA Calculation" textFill="#41dce4">
+                           <font>
+                              <Font name="Poppins Bold" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="23.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="labelGpaCalculation" prefHeight="121.0" prefWidth="233.0" text="0.00" textFill="#86d7dc">
+                           <font>
+                              <Font name="Poppins Bold" size="86.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="225.0" text="See more ➡" textFill="#41dce4">
+                           <font>
+                              <Font name="Poppins Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="17.0" right="14.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox accessibleRole="BUTTON" onMouseClicked="#visitLecturesPage" prefHeight="212.0" prefWidth="252.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 34px; -fx-border-radius: 34px;">
+                     <children>
+                        <Label text="Lectures Today">
+                           <font>
+                              <Font name="Poppins Bold" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="23.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="labelLecturesToday" prefHeight="121.0" prefWidth="233.0" text="0" textFill="#d4d4d4">
+                           <font>
+                              <Font name="Poppins Bold" size="86.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="225.0" text="See more ➡">
+                           <font>
+                              <Font name="Poppins Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="17.0" right="14.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="80.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="31.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets left="84.0" right="80.0" top="20.0" />
+               </VBox.margin>
+               <children>
+                  <VBox maxHeight="-Infinity" prefHeight="621.0" prefWidth="804.0" spacing="10.0">
+                     <children>
+                        <VBox prefHeight="34.0" prefWidth="671.0">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="475.0" text="🤖 Study AI Bot ( Beta )" textFill="WHITE">
+                                 <font>
+                                    <Font name="Ink Free" size="26.0" />
+                                 </font>
+                                 <effect>
+                                    <Glow level="0.4" />
+                                 </effect>
+                              </Label>
+                              <Label prefHeight="23.0" prefWidth="713.0" text="Ask any issues you have, when studying" textFill="WHITE">
+                                 <font>
+                                    <Font name="Ink Free" size="26.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="25.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <Glow />
+                                 </effect>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="30.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox fx:id="ancChatBot" prefHeight="380.0" prefWidth="671.0" style="-fx-background-color: transparent; -fx-border-radius: 25px; -fx-background-radius: 25px;" VBox.vgrow="ALWAYS">
+                           <padding>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: white; -fx-border-width: 2px; -fx-border-radius: 10px;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox prefHeight="391.0" prefWidth="1087.0">
+                                       <children>
+                                          <TextFlow fx:id="txtChatFlow" lineSpacing="5.0" prefHeight="356.0" prefWidth="477.0" stylesheets="@styles/textFlow.css">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="10.0" />
+                                             </VBox.margin></TextFlow>
+                                       </children>
+                                    </VBox>
+                                    <StackPane alignment="TOP_RIGHT" prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <effect>
+                                    <Glow />
+                                 </effect>
+                              </HBox>
+                              <HBox accessibleRole="BUTTON" prefHeight="54.0" prefWidth="650.0" style="-fx-background-color: transparent; -fx-background-radius: 25px; -fx-border-radius: 25px;">
+                                 <children>
+                                    <TextField fx:id="txtEnterMsg" prefHeight="54.0" prefWidth="690.0" promptText="Explain about mitochondria." style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: white;" stylesheets="@styles/textField.css" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="10.0" right="3.0" />
+                                       </padding>
+                                       <effect>
+                                          <Glow />
+                                       </effect>
+                                    </TextField>
+                                    <StackPane fx:id="btnSendMsg" onMouseClicked="#sendMessage" prefHeight="53.0" prefWidth="69.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <ImageView fitHeight="29.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/12439274-removebg-preview.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </StackPane>
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <VBox.margin>
+                                    <Insets left="7.0" top="7.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

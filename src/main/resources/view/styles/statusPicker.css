@@ -1,0 +1,8 @@
+.status-picker{
+    -fx-font-size: 14px;
+    -fx-background-color: #ffff;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1px;
+}

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ancMainPage" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #00072d;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.strtgst.controller.MainPageController">
+   <children>
+      <VBox layoutX="173.0" layoutY="199.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox maxWidth="362.0" minWidth="335.0" prefHeight="1000.0" prefWidth="335.0" style="-fx-background-color: white; -fx-background-radius: 0 40px 40px 0; -fx-border-radius: 40px;">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Logo.jpg" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets left="59.0" top="37.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <Glow />
+                                 </effect>
+                              </ImageView>
+                              <HBox accessibleRole="BUTTON" maxHeight="48.0" maxWidth="307.0" minWidth="83.0" onMouseClicked="#visitDashboardPage" prefHeight="48.0" prefWidth="307.0" spacing="25.0" style="-fx-background-color: #FDFBFB; -fx-background-radius: 0px 10px 10px 0px;">
+                                 <VBox.margin>
+                                    <Insets right="55.0" top="75.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/mynaui_grid-solid.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label prefHeight="36.0" prefWidth="163.0" text="Dashboard">
+                                       <font>
+                                          <Font name="Poppins Regular" size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="-5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets left="62.0" right="26.0" top="12.0" />
+                                 </padding>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </HBox>
+                              <HBox accessibleRole="BUTTON" maxHeight="48.0" maxWidth="307.0" onMouseClicked="#visitCalendarPage" prefHeight="48.0" prefWidth="307.0" spacing="25.0" style="-fx-background-color: #FDFBFB; -fx-background-radius: 0px 10px 10px 0px;">
+                                 <children>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/solar_calendar-bold.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Calendar">
+                                       <font>
+                                          <Font name="Poppins Regular" size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="-5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets left="62.0" right="26.0" top="12.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets right="55.0" top="35.0" />
+                                 </VBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </HBox>
+                              <HBox accessibleRole="BUTTON" maxHeight="48.0" maxWidth="307.0" onMouseClicked="#visitTaskPage" prefHeight="48.0" prefWidth="307.0" spacing="25.0" style="-fx-background-color: #FDFBFB; -fx-background-radius: 0px 10px 10px 0px;">
+                                 <children>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/mdi_clipboard-tick.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Tasks">
+                                       <font>
+                                          <Font name="Poppins Regular" size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="-5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets left="62.0" right="26.0" top="12.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets right="55.0" top="35.0" />
+                                 </VBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </HBox>
+                              <HBox accessibleRole="BUTTON" maxHeight="48.0" maxWidth="307.0" onMouseClicked="#visitAssignmentPage" prefHeight="48.0" prefWidth="307.0" spacing="25.0" style="-fx-background-color: #FDFBFB; -fx-background-radius: 0px 10px 10px 0px;">
+                                 <children>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/emojione-monotone_letter-a.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label prefHeight="35.0" prefWidth="160.0" text="Assignment">
+                                       <font>
+                                          <Font name="Poppins Regular" size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="-5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets left="62.0" right="6.0" top="12.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets right="55.0" top="35.0" />
+                                 </VBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </HBox>
+                              <HBox accessibleRole="BUTTON" maxHeight="48.0" maxWidth="307.0" onMouseClicked="#visitSubjectPage" prefHeight="48.0" prefWidth="307.0" spacing="25.0" style="-fx-background-color: #FDFBFB; -fx-background-radius: 0px 10px 10px 0px;">
+                                 <children>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/material-symbols_assignment.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label prefHeight="35.0" prefWidth="160.0" text="Subject">
+                                       <font>
+                                          <Font name="Poppins Regular" size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="-5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets left="62.0" right="6.0" top="12.0" />
+                                 </padding>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <VBox.margin>
+                                    <Insets right="55.0" top="35.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox accessibleRole="BUTTON" maxHeight="73.0" maxWidth="307.0" onMouseClicked="#visitSettingsPage" prefHeight="73.0" prefWidth="307.0" style="-fx-background-color: #00072d; -fx-border-radius: 0 10px 10px 0; -fx-background-radius: 0 10px 10px 0;">
+                                 <children>
+                                    <ImageView fitHeight="75.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/836-removebg-preview.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <VBox prefHeight="55.0" prefWidth="205.0">
+                                       <children>
+                                          <Label fx:id="txtStudentName" text="John Doe" textFill="WHITE">
+                                             <font>
+                                                <Font name="Poppins Bold" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="txtUsername" text="\@grandmaster12" textFill="WHITE">
+                                             <font>
+                                                <Font name="Poppins Regular" size="14.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="-3.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="14.5" top="14.5" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets right="55.0" top="232.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="42.0" />
+                                 </padding>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <effect>
+                                    <Glow />
+                                 </effect>
+                              </HBox>
+                              <HBox accessibleRole="BUTTON" maxHeight="48.0" maxWidth="307.0" onMouseClicked="#visitLoginPage" prefHeight="48.0" prefWidth="307.0" spacing="25.0" style="-fx-background-color: #FDFBFB; -fx-background-radius: 0px 10px 10px 0px;">
+                                 <children>
+                                    <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/majesticons_logout(1).png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Log out">
+                                       <font>
+                                          <Font name="Poppins Regular" size="24.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="-5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets left="62.0" right="26.0" top="12.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets right="55.0" top="21.0" />
+                                 </VBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <AnchorPane fx:id="ancTabDisplay" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

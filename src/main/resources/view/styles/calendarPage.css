@@ -1,0 +1,20 @@
+.calendar-view .toggle-button {
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-size: 16px;
+}
+
+.calendar-view .tool-bar{
+    -fx-background-color: #F2F6FF;
+    -fx-pref-height: 70px;
+}
+
+.toggle-button{
+    -fx-background-color: #ffffff;
+    -fx-border-width: 2px;
+}
+.calendar-view GridPane{
+    -fx-background-color: white;
+    -fx-pref-height: 40px;
+    -fx-background-radius: 20px;
+}

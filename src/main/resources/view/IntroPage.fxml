@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ancIntro" prefHeight="1000.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ijse.strtgst.controller.IntroPageController">
+   <children>
+      <MediaView fx:id="mediaViewer" fitHeight="1000.0" fitWidth="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="1000.0" prefWidth="1071.0">
+               <children>
+                  <Label fx:id="lblMain" text="STRTGST">
+                     <font>
+                        <Font name="Cambria Math" size="143.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="110.0" top="400.0" />
+                     </VBox.margin>
+                     <textFill>
+                        <LinearGradient endX="0.5876777251184835" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.14901961386203766" green="0.772549033164978" blue="0.9647058844566345" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.006711409395973154">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </Label>
+                  <Label fx:id="lblComment" prefHeight="55.0" prefWidth="1130.0" text="Knowledge is the best weapon out their - &quot;Common Myth&quot;">
+                     <font>
+                        <Font name="Ink Free" size="39.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="110.0" />
+                     </VBox.margin>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.14901961386203766" green="0.772549033164978" blue="0.9647058844566345" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.006711409395973154">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showLoginFields" prefHeight="65.0" prefWidth="124.0" style="-fx-background-color: transparent;" stylesheets="@styles/introButton.css" text="Login" textFill="WHITE">
+                           <font>
+                              <Font name="DM Serif Display Regular" size="30.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="110.0" right="40.0" top="20.0" />
+                           </HBox.margin>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Button>
+                        <Button fx:id="btnSignUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showSignUpFields" prefHeight="65.0" prefWidth="154.0" style="-fx-background-color: transparent;" stylesheets="@styles/introButton.css" text="Sign up" textFill="WHITE">
+                           <font>
+                              <Font name="DM Serif Display Regular" size="30.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <padding>
+                              <Insets left="-10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Button>
+                        <Button fx:id="btnExit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeApp" prefHeight="65.0" prefWidth="90.0" style="-fx-background-color: transparent;" stylesheets="@styles/introButton.css" text="Exit" textFill="WHITE">
+                           <font>
+                              <Font name="DM Serif Display Regular" size="30.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <padding>
+                              <Insets left="-10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets left="40.0" top="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <AnchorPane fx:id="ancForms" prefHeight="1000.0" prefWidth="437.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets right="25.0" top="350.0" />
+               </HBox.margin>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
