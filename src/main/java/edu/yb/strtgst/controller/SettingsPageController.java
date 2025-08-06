@@ -1,8 +1,9 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.StudentBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.StudentDto;
-import edu.yb.strtgst.model.StudentModel;
 import edu.yb.strtgst.util.AlertUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -33,12 +34,13 @@ public class SettingsPageController implements Initializable {
     private StudentDto studentDetails;
     private final AppContext appContext = AppContext.getInstance();
     private final MainPageController mainPageController = appContext.getMainPageController();
-    private final StudentModel studentModel = new StudentModel();
     private final String usernamePattern = "^[a-zA-Z0-9_-]{3,}$";
     private final String emailPattern = "^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$";
     private final String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\\-_*])[a-zA-Z0-9@#$%^&+=.\\-_]{6,}$";
     private final String errorStyle = "-fx-border-color: #ce0101; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-radius: 10px";
     private final String normalStyle = "-fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-radius: 10px";
+
+    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOType.STUDENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,7 +60,7 @@ public class SettingsPageController implements Initializable {
 
     private void initializeData() {
         try {
-            studentDetails = studentModel.fetchStudentDetails(appContext.getUsername());
+            studentDetails = studentBO.fetchStudentDetails(appContext.getUsername());
             if (studentDetails == null) {
                 AlertUtil.setErrorAlert("Error when fetching student details");
                 return;
@@ -88,7 +90,7 @@ public class SettingsPageController implements Initializable {
                     dateOfBirth
             );
             try {
-                if (studentModel.updateStudent(studentDto)) {
+                if (studentBO.updateStudent(studentDto)) {
                     AlertUtil.setInfoAlert("Successfully made changes");
                     appContext.setUsername(username);
                     mainPageController.setUpLabels();
@@ -152,7 +154,7 @@ public class SettingsPageController implements Initializable {
 
     private boolean isUsernameTaken(String username){
         try{
-            return studentModel.fetchExistingUsername(username) && !studentDetails.getUsername().equals(username);
+            return studentBO.fetchExistingUsername(username) && !studentDetails.getUsername().equals(username);
         } catch (SQLException e){
             AlertUtil.setErrorAlert("Error when checking if username exists.");
             e.printStackTrace();
@@ -162,7 +164,7 @@ public class SettingsPageController implements Initializable {
 
     private boolean isEmailTaken(String email){
         try{
-            return studentModel.fetchExistingEmail(email) && !studentDetails.getEmail().equals(email);
+            return studentBO.fetchExistingEmail(email) && !studentDetails.getEmail().equals(email);
         } catch (SQLException e){
             AlertUtil.setErrorAlert("Error when checking if email exists.");
             e.printStackTrace();

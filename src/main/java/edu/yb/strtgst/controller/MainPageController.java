@@ -1,7 +1,8 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.StudentBO;
 import edu.yb.strtgst.context.AppContext;
-import edu.yb.strtgst.model.StudentModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.Navigation;
 import edu.yb.strtgst.util.View;
@@ -23,7 +24,8 @@ public class MainPageController implements Initializable {
     public MediaView mediaViewer;
 
     private AppContext appContext = AppContext.getInstance();
-    private final StudentModel studentModel = new StudentModel();
+
+    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOType.STUDENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,7 +38,7 @@ public class MainPageController implements Initializable {
         try {
             String username = appContext.getUsername();
             txtUsername.setText("@" + username);
-            txtStudentName.setText(studentModel.fetchStudentName(username));
+            txtStudentName.setText(studentBO.fetchStudentName(username));
         } catch (SQLException e) {
             AlertUtil.setErrorAlert("Error when fetching student name and username");
             e.printStackTrace();

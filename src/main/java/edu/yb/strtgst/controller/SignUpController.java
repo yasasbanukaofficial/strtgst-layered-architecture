@@ -1,8 +1,9 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.StudentBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.StudentDto;
-import edu.yb.strtgst.model.StudentModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.IdLoader;
 import javafx.event.ActionEvent;
@@ -20,7 +21,6 @@ public class SignUpController {
     public TextField txtEmail;
     public PasswordField txtPassword;
 
-    private final StudentModel studentModel = new StudentModel();
     private final AppContext appContext = AppContext.getInstance();
     private final IntroPageController introPageController = appContext.getIntroPageController();
     private final String usernamePattern = "^[a-zA-Z0-9_-]{3,}$";
@@ -28,6 +28,8 @@ public class SignUpController {
     private final String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\\-_*])[a-zA-Z0-9@#$%^&+=.\\-_]{6,}$";
     private final String errorStyle = "-fx-border-color: #ce0101; -fx-background-color: transparent; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-radius: 10px";
     private final String normalStyle = "-fx-border-color: #000000; -fx-background-color: transparent; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-radius: 10px";
+
+    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOType.STUDENT);
 
     public void signUpUser(ActionEvent actionEvent) {
         String studentId = loadNextId();
@@ -38,7 +40,7 @@ public class SignUpController {
 
         if (validateInputs(username, email, password)) {
             try {
-                if (studentModel.addStudent(studentDto)) {
+                if (studentBO.addStudent(studentDto)) {
                     AlertUtil.setInfoAlert("Successfully Saved user");
                     appContext.setUsername(username);
                     introPageController.visitDashboard();
@@ -97,7 +99,7 @@ public class SignUpController {
 
     private boolean isUsernameTaken(String username){
         try{
-            return studentModel.fetchExistingUsername(username);
+            return studentBO.fetchExistingUsername(username);
         } catch (SQLException e){
             AlertUtil.setErrorAlert("Error when checking if username exists.");
             e.printStackTrace();
@@ -107,7 +109,7 @@ public class SignUpController {
 
     private boolean isEmailTaken(String email){
         try{
-            return studentModel.fetchExistingEmail(email);
+            return studentBO.fetchExistingEmail(email);
         } catch (SQLException e){
             AlertUtil.setErrorAlert("Error when checking if email exists.");
             e.printStackTrace();

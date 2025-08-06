@@ -1,10 +1,10 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.StudentBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.SubjectDto;
 import edu.yb.strtgst.dto.tm.SubjectTM;
-import edu.yb.strtgst.model.AcademicModel;
-import edu.yb.strtgst.model.StudentModel;
 import edu.yb.strtgst.model.SubjectModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.IdLoader;
@@ -36,15 +36,16 @@ public class SubjectFormController implements Initializable {
     private final SubjectModel subjectModel = new SubjectModel();
     private static final AppContext appContext = AppContext.getInstance();
     private final SubjectPageController subjectPageController = appContext.getSubjectPageController();
-    private final AcademicModel academicModel = new AcademicModel();
     private static String studId = "";
+
+    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOType.STUDENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         appContext.setSubjectFormController(this);
         setupFormDefaults();
         try {
-            studId = StudentModel.getStudentIdByUsername(appContext.getUsername());
+            studId = studentBO.getStudentIdByUsername(appContext.getUsername());
         } catch (Exception e) {
             AlertUtil.setErrorAlert("Error when finding student ID");
         }

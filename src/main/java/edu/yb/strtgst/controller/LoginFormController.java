@@ -1,8 +1,9 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.StudentBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.StudentDto;
-import edu.yb.strtgst.model.StudentModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.View;
 import javafx.event.ActionEvent;
@@ -26,6 +27,8 @@ public class LoginFormController {
     private final AppContext appContext = AppContext.getInstance();
     private final IntroPageController introPageController = appContext.getIntroPageController();
     public Button btnForgotPassword;
+
+    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOType.STUDENT);
 
     public void loginUser(ActionEvent actionEvent) {
         String username = txtUsername.getText().trim();
@@ -57,7 +60,7 @@ public class LoginFormController {
     }
 
     public boolean validateCredentials(String username, String password) throws Exception {
-        StudentDto studentDto = StudentModel.getStudent(username);
+        StudentDto studentDto = studentBO.getStudent(username);
         return studentDto != null && password.equals(studentDto.getPassword());
     }
 
