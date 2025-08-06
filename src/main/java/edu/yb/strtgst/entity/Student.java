@@ -1,9 +1,16 @@
 package edu.yb.strtgst.entity;
 
+import lombok.*;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Student implements Serializable {
     private String studId;
     private String studName;
