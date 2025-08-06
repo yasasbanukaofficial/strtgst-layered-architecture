@@ -7,6 +7,7 @@ import edu.yb.strtgst.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class StudentDAOImpl implements StudentDAO {
     @Override
@@ -92,5 +93,25 @@ public class StudentDAOImpl implements StudentDAO {
             return rst.getString(1);
         }
         return null;
+    }
+
+    @Override
+    public boolean deleteEntity(String id) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public String fetchExistingID(String name) throws SQLException {
+        return "";
+    }
+
+    @Override
+    public ArrayList<Student> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public String loadNextID() {
+        return "";
     }
 }

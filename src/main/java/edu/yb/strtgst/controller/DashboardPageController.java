@@ -1,5 +1,7 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.SubjectBO;
 import edu.yb.strtgst.model.*;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.Navigation;
@@ -34,12 +36,13 @@ public class DashboardPageController implements Initializable {
 
     private final TaskModel taskModel = new TaskModel();
     private final AssignmentModel assignmentModel = new AssignmentModel();
-    private final SubjectModel subjectModel = new SubjectModel();
     private final CalendarModel calendarModel = new CalendarModel();
     public MediaView mediaViewer;
     private StringBuilder previousMsg = new StringBuilder();
     private final ChatBotModel chatBotModel = new ChatBotModel();
     private final PromptBuilder promptBuilder = new PromptBuilder();
+
+    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,7 +82,7 @@ public class DashboardPageController implements Initializable {
                 •  Ask about History (Who is Napoleon Bonaparte?)
                 """);
         txtChatFlow.getChildren().add(intialText);
-        double gpa = subjectModel.getGPACalculation();
+        double gpa = subjectBO.getGPACalculation();
         labelGpaCalculation.setText(String.format("%.2f", gpa));
     }
 

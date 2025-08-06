@@ -1,10 +1,11 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.SubjectBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.db.DBConnection;
 import edu.yb.strtgst.dto.SubjectDto;
 import edu.yb.strtgst.dto.tm.SubjectTM;
-import edu.yb.strtgst.model.SubjectModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.DateUtil;
 import edu.yb.strtgst.util.Navigation;
@@ -42,8 +43,9 @@ public class SubjectPageController implements Initializable {
     public TableColumn<SubjectTM, String> columnSubjectMarks;
     public TableColumn<SubjectTM, String> columnSubjectGrade;
 
-    private final SubjectModel subjectModel = new SubjectModel();
     private final AppContext appContext = AppContext.getInstance();
+
+    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -85,7 +87,7 @@ public class SubjectPageController implements Initializable {
 
     public void loadTableData(){
         try {
-            ArrayList<SubjectDto> allSubjects = subjectModel.getAllSubjects();
+            ArrayList<SubjectDto> allSubjects = subjectBO.getAllSubjects();
             tblSubject.setItems(FXCollections.observableArrayList(
                     allSubjects.stream().map(subjectDto -> new SubjectTM(
                                     subjectDto.getSubId(),

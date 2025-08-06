@@ -2,10 +2,10 @@ package edu.yb.strtgst.controller;
 
 import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.custom.StudentBO;
+import edu.yb.strtgst.bo.custom.SubjectBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.SubjectDto;
 import edu.yb.strtgst.dto.tm.SubjectTM;
-import edu.yb.strtgst.model.SubjectModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.IdLoader;
 import edu.yb.strtgst.util.Navigation;
@@ -33,12 +33,12 @@ public class SubjectFormController implements Initializable {
     public Button btnAddSubject;
 
     private SubjectDto subjectDto;
-    private final SubjectModel subjectModel = new SubjectModel();
     private static final AppContext appContext = AppContext.getInstance();
     private final SubjectPageController subjectPageController = appContext.getSubjectPageController();
     private static String studId = "";
 
     StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOType.STUDENT);
+    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -114,7 +114,7 @@ public class SubjectFormController implements Initializable {
             );
 
             try {
-                if (subjectModel.addSubject(subjectDto)) {
+                if (subjectBO.addSubject(subjectDto)) {
                     AlertUtil.setInfoAlert("Successfully added a subject");
                     Navigation.navigateTo(ancAddNewSubject, View.DEFAULT_SUBJECT);
                     subjectPageController.loadTableData();
@@ -134,7 +134,7 @@ public class SubjectFormController implements Initializable {
         if (resp.isPresent() && resp.get() == ButtonType.YES) {
             String subId = subjectTM.getSubId();
             try {
-                if (subjectModel.deleteSubject(subId)) {
+                if (subjectBO.deleteSubject(subId)) {
                     subjectPageController.setupTableColumn();
                     setupFormDefaults();
                     AlertUtil.setInfoAlert("Successfully deleted a subject");
@@ -165,7 +165,7 @@ public class SubjectFormController implements Initializable {
             );
 
             try {
-                if (subjectModel.editSubject(subjectDto)) {
+                if (subjectBO.editSubject(subjectDto)) {
                     AlertUtil.setInfoAlert("Successfully edited the subject");
                     Navigation.navigateTo(ancAddNewSubject, View.DEFAULT_SUBJECT);
                     subjectPageController.loadTableData();

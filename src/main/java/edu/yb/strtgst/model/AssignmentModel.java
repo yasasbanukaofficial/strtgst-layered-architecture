@@ -1,5 +1,7 @@
 package edu.yb.strtgst.model;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.SubjectBO;
 import edu.yb.strtgst.db.DBConnection;
 import edu.yb.strtgst.dto.AssignmentDto;
 import edu.yb.strtgst.util.AlertUtil;
@@ -12,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AssignmentModel {
-    private final SubjectModel subjectModel = new SubjectModel();
+    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
     private boolean saveAssignment(AssignmentDto assignmentDto) throws SQLException {
         return CrudUtil.execute(
                 "INSERT INTO Assignment VALUES (?, ?, ?, ?, ?, ?, ?)",
@@ -70,11 +72,11 @@ public class AssignmentModel {
     }
 
     private boolean addGradeMarks(String subId, String assignmentMarks) throws SQLException {
-        return subjectModel.addGradeMarks(subId, assignmentMarks);
+        return subjectBO.addGradeMarks(subId, assignmentMarks);
     }
 
     private boolean updateSubMarks(String subId, String assignmentMarks) throws SQLException {
-        return subjectModel.updateGradeMarks(subId, assignmentMarks);
+        return subjectBO.updateGradeMarks(subId, assignmentMarks);
     }
 
     public boolean deleteAssignment(String assignmentId) throws SQLException {

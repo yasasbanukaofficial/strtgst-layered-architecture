@@ -2,6 +2,7 @@ package edu.yb.strtgst.bo;
 
 import edu.yb.strtgst.bo.custom.StudentBO;
 import edu.yb.strtgst.bo.custom.impl.StudentBOImpl;
+import edu.yb.strtgst.bo.custom.impl.SubjectBOImpl;
 
 public class BOFactory {
     private static BOFactory boFactory;
@@ -26,6 +27,8 @@ public class BOFactory {
         switch (types){
             case STUDENT:
                 return new StudentBOImpl();
+            case SUBJECT:
+                return new SubjectBOImpl();
             default:
                 return null;
         }
