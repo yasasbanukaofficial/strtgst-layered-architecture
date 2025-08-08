@@ -98,7 +98,7 @@ public class SubjectFormController implements Initializable {
     }
 
     public void addNewSubject(ActionEvent actionEvent) {
-        String subId = subjectBO.loadNextID("Subject", "subId");
+        String subId = subjectBO.loadNextID("Subject", "sub_Id");
         String subjectName = txtSubjectName.getText();
         String subjectDescription = txtSubjectDescription.getText();
         String subjectMarks = txtMarks.getText();
