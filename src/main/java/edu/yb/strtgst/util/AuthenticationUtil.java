@@ -1,11 +1,9 @@
-package edu.yb.strtgst.model;
-
-import edu.yb.strtgst.util.CrudUtil;
+package edu.yb.strtgst.util;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AuthenticationModel {
+public class AuthenticationUtil {
     public static boolean updatePassword(String password, String email) throws SQLException {
         return CrudUtil.execute("UPDATE Student SET password = ? WHERE email = ?", password, email);
     }

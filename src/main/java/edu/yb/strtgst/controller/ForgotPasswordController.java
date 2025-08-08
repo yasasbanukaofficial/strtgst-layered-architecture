@@ -1,6 +1,6 @@
 package edu.yb.strtgst.controller;
 
-import edu.yb.strtgst.model.AuthenticationModel;
+import edu.yb.strtgst.util.AuthenticationUtil;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.Navigation;
 import edu.yb.strtgst.util.View;
@@ -30,7 +30,7 @@ public class ForgotPasswordController {
 
     private int otpCode;
     private static String userEmail = "";
-    private final AuthenticationModel forgotPasswordModel = new AuthenticationModel();
+    private final AuthenticationUtil forgotPasswordModel = new AuthenticationUtil();
     private final String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\\-_*])[a-zA-Z0-9@#$%^&+=.\\-_]{6,}$";
     private final String errorStyle = "-fx-border-color: #ce0101; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-radius: 10px";
     private final String normalStyle = "-fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-radius: 10px";
@@ -97,7 +97,7 @@ public class ForgotPasswordController {
 
     public void updatePassword(String password) {
         try {
-            boolean isPasswordUpdated = AuthenticationModel.updatePassword(password, userEmail);
+            boolean isPasswordUpdated = AuthenticationUtil.updatePassword(password, userEmail);
             if (isPasswordUpdated){
                 AlertUtil.setInfoAlert("Password has been updated successfully.");
                 Stage stage = (Stage) ancUpdatePassword.getScene().getWindow();

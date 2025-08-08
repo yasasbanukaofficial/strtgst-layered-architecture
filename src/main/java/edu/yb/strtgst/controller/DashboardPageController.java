@@ -4,11 +4,7 @@ import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.bo.custom.SubjectBO;
 import edu.yb.strtgst.bo.custom.TaskBO;
-import edu.yb.strtgst.model.*;
-import edu.yb.strtgst.util.AlertUtil;
-import edu.yb.strtgst.util.Navigation;
-import edu.yb.strtgst.util.PromptBuilder;
-import edu.yb.strtgst.util.View;
+import edu.yb.strtgst.util.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -37,10 +33,10 @@ public class DashboardPageController implements Initializable {
     public StackPane btnSendMsg;
 
     private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOType.TASK);
-    private final CalendarModel calendarModel = new CalendarModel();
+    private final CalendarUtil calendarUtil = new CalendarUtil();
     public MediaView mediaViewer;
     private StringBuilder previousMsg = new StringBuilder();
-    private final ChatBotModel chatBotModel = new ChatBotModel();
+    private final ChatBotUtil chatBotUtil = new ChatBotUtil();
     private final PromptBuilder promptBuilder = new PromptBuilder();
 
     SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
@@ -108,8 +104,8 @@ public class DashboardPageController implements Initializable {
         try {
             labelTotalTasks.setText(taskBO.getPendingOrOverdueTaskCount());
             labelTotalAssignments.setText(assignmentBO.getPendingOrOverdueAssignmentCount());
-            labelEventsToday.setText(calendarModel.getAllFutureEntries("Event"));
-            labelLecturesToday.setText(calendarModel.getAllFutureEntries("Lecture"));
+            labelEventsToday.setText(calendarUtil.getAllFutureEntries("Event"));
+            labelLecturesToday.setText(calendarUtil.getAllFutureEntries("Lecture"));
         } catch (Exception e) {
             AlertUtil.setErrorAlert("Error when fetching total");
             e.printStackTrace();
@@ -123,7 +119,7 @@ public class DashboardPageController implements Initializable {
             AlertUtil.setErrorAlert("Please enter a valid entry message to send");
             return;
         }
-        String response = chatBotModel.getResponse(promptBuilder.askAboutStudies(userInput, previousMsg));
+        String response = chatBotUtil.getResponse(promptBuilder.askAboutStudies(userInput, previousMsg));
         Text userTxt = new Text("User:      " + userInput + "\n");
         Text responseTxt = new Text("Chat:      " + response);
         txtChatFlow.getChildren().add(userTxt);

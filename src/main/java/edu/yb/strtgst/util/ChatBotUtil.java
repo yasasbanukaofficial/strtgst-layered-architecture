@@ -1,10 +1,9 @@
-package edu.yb.strtgst.model;
+package edu.yb.strtgst.util;
 
 import com.google.genai.Client;
 import com.google.genai.types.GenerateContentResponse;
-import edu.yb.strtgst.util.AlertUtil;
 
-public class ChatBotModel {
+public class ChatBotUtil {
     private static final String GOOGLE_API_KEY = "AIzaSyAboDpPm77ZEmlnGyyRK-Ta518yv6e9p9Q";
 
     public static String getResponse(String instructions) {

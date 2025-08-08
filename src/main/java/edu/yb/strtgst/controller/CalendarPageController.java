@@ -9,8 +9,8 @@ import com.calendarfx.view.DateControl;
 import com.calendarfx.view.DetailedDayView;
 import com.calendarfx.view.page.MonthPage;
 import com.calendarfx.view.page.WeekPage;
-import edu.yb.strtgst.model.CalendarModel;
-import edu.yb.strtgst.model.ChatBotModel;
+import edu.yb.strtgst.util.CalendarUtil;
+import edu.yb.strtgst.util.ChatBotUtil;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.DateUtil;
 import edu.yb.strtgst.util.PromptBuilder;
@@ -52,7 +52,7 @@ public class CalendarPageController implements Initializable {
     private final MonthPage monthView = new MonthPage();
     private final AgendaView agendaView = new AgendaView();
 
-    private final CalendarModel calendarModel = new CalendarModel();
+    private final CalendarUtil calendarUtil = new CalendarUtil();
     private static ArrayList<CalendarEvent> events = new ArrayList<>();
     private static ArrayList<Entry> entries = new ArrayList<>();
     private boolean isLoading = false;
@@ -124,14 +124,14 @@ public class CalendarPageController implements Initializable {
             try {
                 if (entry.getCalendar() == null) {
                     if (matchingEvent != null && matchingEvent.getOldCalendar() != null) {
-                        if (!calendarModel.deleteEntry(matchingEvent.getOldCalendar().getName(), entry.getId())) {
+                        if (!calendarUtil.deleteEntry(matchingEvent.getOldCalendar().getName(), entry.getId())) {
                             AlertUtil.setErrorAlert("Error when deleting entry from the database");
                         }
                     } else {
                         AlertUtil.setErrorAlert("Could not determine old calendar for deleted entry: " + entry.getId());
                     }
                 } else {
-                    if (!calendarModel.syncEntryWithDatabase(entry)) {
+                    if (!calendarUtil.syncEntryWithDatabase(entry)) {
                         AlertUtil.setErrorAlert("Error when modifying an event to the calendar");
                     }
                 }
@@ -153,10 +153,10 @@ public class CalendarPageController implements Initializable {
             eventsCalendar.clear();
             studySessionCalendar.clear();
 
-            loadEntriesForCalendar(examCalendar, calendarModel.getAllExamEntries());
-            loadEntriesForCalendar(lectureCalendar, calendarModel.getAllLectureEntries());
-            loadEntriesForCalendar(eventsCalendar, calendarModel.getAllEventEntries());
-            loadEntriesForCalendar(studySessionCalendar, calendarModel.getAllStudySessionEntries());
+            loadEntriesForCalendar(examCalendar, calendarUtil.getAllExamEntries());
+            loadEntriesForCalendar(lectureCalendar, calendarUtil.getAllLectureEntries());
+            loadEntriesForCalendar(eventsCalendar, calendarUtil.getAllEventEntries());
+            loadEntriesForCalendar(studySessionCalendar, calendarUtil.getAllStudySessionEntries());
 
             refreshViews();
         } catch (SQLException e) {
@@ -218,13 +218,13 @@ public class CalendarPageController implements Initializable {
                 return;
             }
 
-            String aiResponse = ChatBotModel.getResponse(PromptBuilder.buildSqlInsertPrompt(userInput));
+            String aiResponse = ChatBotUtil.getResponse(PromptBuilder.buildSqlInsertPrompt(userInput));
 
             boolean isValid = aiResponse != null && aiResponse.trim().toLowerCase().startsWith("insert into");
 
             String response;
             if (isValid) {
-                boolean isSynced = calendarModel.syncEntryByAi(aiResponse);
+                boolean isSynced = calendarUtil.syncEntryByAi(aiResponse);
                 response = isSynced ?
                         "Your event is successfully added. Add some more!" :
                         "Failed to add an event. Try with a stable internet connection.";

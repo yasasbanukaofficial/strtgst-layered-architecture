@@ -1,13 +1,12 @@
-package edu.yb.strtgst.model;
+package edu.yb.strtgst.util;
 
 import com.calendarfx.model.Entry;
-import edu.yb.strtgst.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CalendarModel {
+public class CalendarUtil {
     private final String [] calendarTableNames = {"Exam", "Lecture", "Event", "study_session"};
     private final String [] calendarTableIdColumns = {"exam_id", "lec_id", "event_id", "ss_id"};
 
