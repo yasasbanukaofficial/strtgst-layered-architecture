@@ -17,4 +17,5 @@ public interface AcademicBO extends SuperBO {
     boolean syncEntryByAi(String query) throws SQLException;
     ArrayList<SubjectDto> getAllSubjects() throws SQLException;
     String loadNextID(String tableName, String columnName);
+    public String getResponse(String instructions);
 }

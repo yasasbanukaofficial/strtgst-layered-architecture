@@ -1,7 +1,10 @@
 package edu.yb.strtgst.dao.custom.impl;
 
+import com.google.genai.Client;
+import com.google.genai.types.GenerateContentResponse;
 import edu.yb.strtgst.dao.custom.AcademicDAO;
 import edu.yb.strtgst.entity.Academic;
+import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -9,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AcademicDAOImpl implements AcademicDAO {
+
+    private static final String GOOGLE_API_KEY = "AIzaSyAboDpPm77ZEmlnGyyRK-Ta518yv6e9p9Q";
 
     @Override
     public boolean addEntity(Academic entity) throws SQLException {
@@ -125,5 +130,23 @@ public class AcademicDAOImpl implements AcademicDAO {
             );
         }
         return null;
+    }
+
+    @Override
+    public String getResponse(String instructions) {
+        System.setProperty("GOOGLE_API_KEY", GOOGLE_API_KEY);
+
+        try {
+            Client client = new Client.Builder().apiKey(GOOGLE_API_KEY).build();
+            GenerateContentResponse response = client.models.generateContent(
+                    "gemini-2.0-flash",
+                    instructions,
+                    null
+            );
+            return response.text();
+        } catch (Exception e) {
+            AlertUtil.setErrorAlert("Error when generating the text through AI " + e.getMessage());
+            return "Error:  " + e.getMessage();
+        }
     }
 }

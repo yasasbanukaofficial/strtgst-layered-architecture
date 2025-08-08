@@ -37,7 +37,6 @@ public class AssignmentFormController implements Initializable {
     public Label labelAssignmentHeader;
     public Label labelCancel;
 
-    private AssignmentDto assignmentDto;
     private final AppContext appContext = AppContext.getInstance();
     private final AssignmentPageController assignmentPageController = appContext.getAssignmentPageController();
 
@@ -84,18 +83,16 @@ public class AssignmentFormController implements Initializable {
 
         setButtonStates(false);
         if (validateAssignmentFields(assignmentName, status, assignmentMarks, date)) {
-            assignmentDto = new AssignmentDto(
-                    assignment_id,
-                    assignmentName,
-                    assignmentDescription,
-                    assignmentMarks,
-                    subName,
-                    date,
-                    status
-            );
-
             try {
-                if (assignmentBO.addAssignment(assignmentDto)) {
+                if (assignmentBO.addAssignment(new AssignmentDto(
+                        assignment_id,
+                        assignmentName,
+                        assignmentDescription,
+                        assignmentMarks,
+                        subName,
+                        date,
+                        status
+                ))) {
                     AlertUtil.setInfoAlert("Successfully added an assignment");
                     Navigation.navigateTo(ancAddNewTask, View.DEFAULT_ASSIGNMENT);
                 } else AlertUtil.setErrorAlert("Failed to save an Assignment");
@@ -141,18 +138,16 @@ public class AssignmentFormController implements Initializable {
 
         setButtonStates(false);
         if (validateAssignmentFields(assignmentName, status, assignmentMarks, date)) {
-            assignmentDto = new AssignmentDto(
-                    assignment_id,
-                    assignmentName,
-                    assignmentDescription,
-                    assignmentMarks,
-                    subName,
-                    date,
-                    status
-            );
-
             try {
-                if (assignmentBO.editAssignment(assignmentDto)) {
+                if (assignmentBO.editAssignment(new AssignmentDto(
+                        assignment_id,
+                        assignmentName,
+                        assignmentDescription,
+                        assignmentMarks,
+                        subName,
+                        date,
+                        status
+                ))) {
                     AlertUtil.setInfoAlert("Successfully edited the assignment");
                     Navigation.navigateTo(ancAddNewTask, View.DEFAULT_ASSIGNMENT);
                 } else AlertUtil.setErrorAlert("Failed to edit the assignment");

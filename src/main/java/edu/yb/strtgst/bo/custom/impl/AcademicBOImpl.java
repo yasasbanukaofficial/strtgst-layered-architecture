@@ -122,4 +122,9 @@ public class AcademicBOImpl implements AcademicBO {
         }
         return "AC001";
     }
+
+    @Override
+    public String getResponse(String instructions){
+        return academicDAO.getResponse(instructions);
+    }
 }

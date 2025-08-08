@@ -1,6 +1,7 @@
 package edu.yb.strtgst.controller;
 
 import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.AcademicBO;
 import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.bo.custom.SubjectBO;
 import edu.yb.strtgst.bo.custom.TaskBO;
@@ -32,44 +33,20 @@ public class DashboardPageController implements Initializable {
     public TextFlow txtChatFlow;
     public StackPane btnSendMsg;
 
-    private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.TASK);
     private final CalendarUtil calendarUtil = new CalendarUtil();
-    public MediaView mediaViewer;
     private StringBuilder previousMsg = new StringBuilder();
-    private final ChatBotUtil chatBotUtil = new ChatBotUtil();
     private final PromptBuilder promptBuilder = new PromptBuilder();
 
     SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SUBJECT);
     AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ASSIGNMENT);
+    TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.TASK);
+    AcademicBO academicBO = (AcademicBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ACADEMIC);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setUpTexts();
         countTotal();
-//        playBackgroundVideo();
     }
-
-//    private void playBackgroundVideo() {
-//        try {
-//            String videoPath = getClass().getResource("/videos/dirt.mp4").toExternalForm();
-//            Media media = new Media(videoPath);
-//            MediaPlayer mediaPlayer = new MediaPlayer(media);
-//            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//            mediaPlayer.setMute(true);
-//            mediaPlayer.play();
-//            mediaViewer.toBack();
-//            mediaViewer.fitWidthProperty().bind(ancDashboard.widthProperty());
-//            mediaViewer.fitHeightProperty().bind(ancDashboard.heightProperty());
-//            mediaViewer.setPreserveRatio(false);
-//            mediaPlayer.setOnReady(() -> {
-//                mediaViewer.setOpacity(1);
-//            });
-//
-//            mediaViewer.setMediaPlayer(mediaPlayer);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     private void setUpTexts() {
         Text intialText = new Text("""
@@ -119,7 +96,7 @@ public class DashboardPageController implements Initializable {
             AlertUtil.setErrorAlert("Please enter a valid entry message to send");
             return;
         }
-        String response = chatBotUtil.getResponse(promptBuilder.askAboutStudies(userInput, previousMsg));
+        String response = academicBO.getResponse(promptBuilder.askAboutStudies(userInput, previousMsg));
         Text userTxt = new Text("User:      " + userInput + "\n");
         Text responseTxt = new Text("Chat:      " + response);
         txtChatFlow.getChildren().add(userTxt);

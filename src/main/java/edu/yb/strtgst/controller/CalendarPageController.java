@@ -9,8 +9,9 @@ import com.calendarfx.view.DateControl;
 import com.calendarfx.view.DetailedDayView;
 import com.calendarfx.view.page.MonthPage;
 import com.calendarfx.view.page.WeekPage;
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.AcademicBO;
 import edu.yb.strtgst.util.CalendarUtil;
-import edu.yb.strtgst.util.ChatBotUtil;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.DateUtil;
 import edu.yb.strtgst.util.PromptBuilder;
@@ -56,6 +57,8 @@ public class CalendarPageController implements Initializable {
     private static ArrayList<CalendarEvent> events = new ArrayList<>();
     private static ArrayList<Entry> entries = new ArrayList<>();
     private boolean isLoading = false;
+
+    AcademicBO academicBO = (AcademicBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ACADEMIC);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -218,7 +221,7 @@ public class CalendarPageController implements Initializable {
                 return;
             }
 
-            String aiResponse = ChatBotUtil.getResponse(PromptBuilder.buildSqlInsertPrompt(userInput));
+            String aiResponse = academicBO.getResponse(PromptBuilder.buildSqlInsertPrompt(userInput));
 
             boolean isValid = aiResponse != null && aiResponse.trim().toLowerCase().startsWith("insert into");
 
