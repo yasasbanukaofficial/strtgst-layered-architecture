@@ -1,12 +1,12 @@
 package edu.yb.strtgst.controller;
 
 import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.AcademicBO;
 import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.AssignmentDto;
 import edu.yb.strtgst.dto.SubjectDto;
 import edu.yb.strtgst.dto.tm.AssignmentTM;
-import edu.yb.strtgst.model.AcademicModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.IdLoader;
 import edu.yb.strtgst.util.Navigation;
@@ -41,12 +41,12 @@ public class AssignmentFormController implements Initializable {
     private AssignmentDto assignmentDto;
     private final AppContext appContext = AppContext.getInstance();
     private final AssignmentPageController assignmentPageController = appContext.getAssignmentPageController();
-    private final AcademicModel academicModel = new AcademicModel();
 
     private ObservableList<String> statusOptions = FXCollections.observableArrayList("Pending", "Completed", "Overdue");
     private ObservableList<String> subjectOptions = FXCollections.observableArrayList();
 
     AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOType.ASSIGNMENT);
+    AcademicBO academicBO = (AcademicBO) BOFactory.getInstance().getBO(BOFactory.BOType.ACADEMIC);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,7 +57,7 @@ public class AssignmentFormController implements Initializable {
 
     private void loadSubjects() {
         try {
-            ArrayList<SubjectDto> subjects = academicModel.getAllSubjects();
+            ArrayList<SubjectDto> subjects = academicBO.getAllSubjects();
             for (SubjectDto dto : subjects) {
                 subjectOptions.add(dto.getSubName());
             }
