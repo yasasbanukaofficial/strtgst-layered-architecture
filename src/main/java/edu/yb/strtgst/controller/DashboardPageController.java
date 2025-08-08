@@ -3,6 +3,7 @@ package edu.yb.strtgst.controller;
 import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.bo.custom.SubjectBO;
+import edu.yb.strtgst.bo.custom.TaskBO;
 import edu.yb.strtgst.model.*;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.Navigation;
@@ -35,7 +36,7 @@ public class DashboardPageController implements Initializable {
     public TextFlow txtChatFlow;
     public StackPane btnSendMsg;
 
-    private final TaskModel taskModel = new TaskModel();
+    private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOType.TASK);
     private final CalendarModel calendarModel = new CalendarModel();
     public MediaView mediaViewer;
     private StringBuilder previousMsg = new StringBuilder();
@@ -105,7 +106,7 @@ public class DashboardPageController implements Initializable {
 
     private void countTotal() {
         try {
-            labelTotalTasks.setText(taskModel.getPendingOrOverdueTaskCount());
+            labelTotalTasks.setText(taskBO.getPendingOrOverdueTaskCount());
             labelTotalAssignments.setText(assignmentBO.getPendingOrOverdueAssignmentCount());
             labelEventsToday.setText(calendarModel.getAllFutureEntries("Event"));
             labelLecturesToday.setText(calendarModel.getAllFutureEntries("Lecture"));

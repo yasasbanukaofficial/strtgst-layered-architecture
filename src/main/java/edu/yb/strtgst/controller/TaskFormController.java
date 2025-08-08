@@ -1,9 +1,10 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.TaskBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.TaskDto;
 import edu.yb.strtgst.dto.tm.TaskTM;
-import edu.yb.strtgst.model.TaskModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.IdLoader;
 import edu.yb.strtgst.util.Navigation;
@@ -33,7 +34,7 @@ public class TaskFormController implements Initializable {
     public Button btnAddTask;
 
     private TaskDto taskDto;
-    private final TaskModel taskModel = new TaskModel();
+    private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOType.TASK);
     private final AppContext appContext = AppContext.getInstance();
     private final TaskPageController taskPageController = appContext.getTaskPageController();
 
@@ -66,7 +67,7 @@ public class TaskFormController implements Initializable {
             );
 
             try {
-                if (taskModel.addTask(taskDto)) {
+                if (taskBO.addTask(taskDto)) {
                     AlertUtil.setInfoAlert("Successfully added a task");
                     Navigation.navigateTo(ancAddNewTask, View.DEFAULT_TASK);
                 } else AlertUtil.setErrorAlert("Failed to save the task");
@@ -88,7 +89,7 @@ public class TaskFormController implements Initializable {
         if (resp.isPresent() && resp.get() == ButtonType.YES) {
             String taskId = taskTM.getTaskId();
             try {
-                if (taskModel.deleteTask(taskId)) {
+                if (taskBO.deleteTask(taskId)) {
                     taskPageController.setupTableColumn();
                     setupFormDefaults();
                     AlertUtil.setInfoAlert("Successfully deleted the task");
@@ -120,7 +121,7 @@ public class TaskFormController implements Initializable {
             );
 
             try {
-                if (taskModel.editTask(taskDto)) {
+                if (taskBO.editTask(taskDto)) {
                     AlertUtil.setInfoAlert("Successfully edited the task");
                     Navigation.navigateTo(ancAddNewTask, View.DEFAULT_TASK);
                 } else AlertUtil.setErrorAlert("Failed to edit the task");
@@ -154,13 +155,7 @@ public class TaskFormController implements Initializable {
     }
 
     public String loadNextID(){
-        try {
-            return IdLoader.getNextID("Tasks", "task_id");
-        } catch (SQLException e) {
-            AlertUtil.setErrorAlert("Error when loading a Task ID");
-            e.printStackTrace();
-        }
-        return "T001";
+        return taskBO.loadNextID("Tasks", "task_id");
     }
 
     private void setupFormDefaults() {

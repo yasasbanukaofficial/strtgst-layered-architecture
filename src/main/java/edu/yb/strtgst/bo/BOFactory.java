@@ -5,6 +5,7 @@ import edu.yb.strtgst.bo.custom.impl.AcademicBOImpl;
 import edu.yb.strtgst.bo.custom.impl.AssignmentBOImpl;
 import edu.yb.strtgst.bo.custom.impl.StudentBOImpl;
 import edu.yb.strtgst.bo.custom.impl.SubjectBOImpl;
+import edu.yb.strtgst.bo.custom.impl.TaskBOImpl;
 
 public class BOFactory {
     private static BOFactory boFactory;
@@ -36,6 +37,8 @@ public class BOFactory {
                 return new AssignmentBOImpl();
             case ACADEMIC:
                 return new AcademicBOImpl();
+            case TASK:
+                return new TaskBOImpl();
             default:
                 return null;
         }

@@ -1,9 +1,10 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.TaskBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.TaskDto;
 import edu.yb.strtgst.dto.tm.TaskTM;
-import edu.yb.strtgst.model.TaskModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.DateUtil;
 import edu.yb.strtgst.util.Navigation;
@@ -36,7 +37,7 @@ public class TaskPageController implements Initializable {
     public TableColumn <TaskTM, String> columnCompletedStatus;
     public Label labelDate;
 
-    private final TaskModel taskModel = new TaskModel();
+    private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOType.TASK);
     private final AppContext appContext = AppContext.getInstance();
 
     @Override
@@ -98,7 +99,7 @@ public class TaskPageController implements Initializable {
 
     private void loadTableData(){
         try {
-            ArrayList<TaskDto> allTasks = taskModel.getAllTasks();
+            ArrayList<TaskDto> allTasks = taskBO.getAllTasks();
             tblTask.setItems(FXCollections.observableArrayList(
                     allTasks.stream().filter(taskDto -> !taskDto.getStatus().equalsIgnoreCase("Completed"))
                             .map(taskDto -> new TaskTM(
@@ -149,7 +150,7 @@ public class TaskPageController implements Initializable {
     public void updateOverdueStatus() {
         try {
             LocalDate today = LocalDate.now();
-            ArrayList<ArrayList> tasks = taskModel.getAllTaskStatus();
+            ArrayList<ArrayList> tasks = taskBO.getAllTaskStatus();
 
             for (ArrayList row : tasks) {
                 String status = row.get(0).toString();
@@ -157,7 +158,7 @@ public class TaskPageController implements Initializable {
                 String taskId = row.get(2).toString();
 
                 if (status.equals("Pending") && dueDate.isBefore(today)) {
-                    taskModel.updateTaskStatus(taskId, "Overdue");
+                    taskBO.updateTaskStatus(taskId, "Overdue");
                 }
             }
             loadTableData();
