@@ -19,7 +19,7 @@ public class SubjectBOImpl implements SubjectBO {
     SubjectDAOImpl subjectDAO = new SubjectDAOImpl();
     @Override
     public boolean saveSubject(SubjectDto subjectDto) throws SQLException {
-        return subjectDAO.addEntity(new Subject(subjectDto.getSubId(), subjectDto.getSubId(), subjectDto.getSubName(), subjectDto.getSubDescription(), subjectDto.getTotalMarks()));
+        return subjectDAO.addEntity(new Subject(subjectDto.getSubId(), subjectDto.getStudId(), subjectDto.getSubName(), subjectDto.getSubDescription(), subjectDto.getTotalMarks()));
     }
 
     @Override
