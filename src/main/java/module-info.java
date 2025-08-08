@@ -13,6 +13,6 @@ module edu.yb.strtgst {
 
     opens edu.yb.strtgst.controller to javafx.fxml;
     opens edu.yb.strtgst.dto to javafx.base;
-    opens edu.yb.strtgst.dto.tm to javafx.base;
+    opens edu.yb.strtgst.view.tm to javafx.base;
     exports edu.yb.strtgst;
 }

@@ -6,7 +6,7 @@ import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.AssignmentDto;
 import edu.yb.strtgst.dto.SubjectDto;
-import edu.yb.strtgst.dto.tm.AssignmentTM;
+import edu.yb.strtgst.view.tm.AssignmentTM;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.Navigation;
 import edu.yb.strtgst.util.View;

@@ -1,4 +1,4 @@
-package edu.yb.strtgst.dto.tm;
+package edu.yb.strtgst.view.tm;
 
 import lombok.*;
 

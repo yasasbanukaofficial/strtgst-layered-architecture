@@ -5,7 +5,7 @@ import edu.yb.strtgst.bo.custom.SubjectBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.db.DBConnection;
 import edu.yb.strtgst.dto.SubjectDto;
-import edu.yb.strtgst.dto.tm.SubjectTM;
+import edu.yb.strtgst.view.tm.SubjectTM;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.DateUtil;
 import edu.yb.strtgst.util.Navigation;
