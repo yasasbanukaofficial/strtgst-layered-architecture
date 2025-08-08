@@ -7,7 +7,6 @@ import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.SubjectDto;
 import edu.yb.strtgst.dto.tm.SubjectTM;
 import edu.yb.strtgst.util.AlertUtil;
-import edu.yb.strtgst.util.IdLoader;
 import edu.yb.strtgst.util.Navigation;
 import edu.yb.strtgst.util.View;
 import javafx.event.ActionEvent;
@@ -37,8 +36,8 @@ public class SubjectFormController implements Initializable {
     private final SubjectPageController subjectPageController = appContext.getSubjectPageController();
     private static String studId = "";
 
-    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOType.STUDENT);
-    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
+    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
+    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SUBJECT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

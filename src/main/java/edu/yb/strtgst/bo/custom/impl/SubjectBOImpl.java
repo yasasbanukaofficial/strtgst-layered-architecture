@@ -1,6 +1,9 @@
 package edu.yb.strtgst.bo.custom.impl;
 
 import edu.yb.strtgst.bo.custom.SubjectBO;
+import edu.yb.strtgst.dao.DAOFactory;
+import edu.yb.strtgst.dao.custom.AssignmentDAO;
+import edu.yb.strtgst.dao.custom.SubjectDAO;
 import edu.yb.strtgst.dao.custom.impl.SubjectDAOImpl;
 import edu.yb.strtgst.db.DBConnection;
 import edu.yb.strtgst.dto.SubjectDto;
@@ -15,7 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SubjectBOImpl implements SubjectBO {
-    SubjectDAOImpl subjectDAO = new SubjectDAOImpl();
+    SubjectDAO subjectDAO = (SubjectDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTYPES.SUBJECT);
     @Override
     public boolean saveSubject(SubjectDto subjectDto) throws SQLException {
         return subjectDAO.addEntity(new Subject(subjectDto.getSubId(), subjectDto.getStudId(), subjectDto.getSubName(), subjectDto.getSubDescription(), subjectDto.getTotalMarks()));

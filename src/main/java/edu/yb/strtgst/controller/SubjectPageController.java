@@ -45,7 +45,7 @@ public class SubjectPageController implements Initializable {
 
     private final AppContext appContext = AppContext.getInstance();
 
-    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
+    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SUBJECT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -41,7 +41,7 @@ public class AssignmentPageController implements Initializable {
 
     private final AppContext appContext = AppContext.getInstance();
 
-    AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOType.ASSIGNMENT);
+    AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ASSIGNMENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -28,7 +28,7 @@ public class LoginFormController {
     private final IntroPageController introPageController = appContext.getIntroPageController();
     public Button btnForgotPassword;
 
-    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOType.STUDENT);
+    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
 
     public void loginUser(ActionEvent actionEvent) {
         String username = txtUsername.getText().trim();

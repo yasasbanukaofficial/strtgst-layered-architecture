@@ -32,15 +32,15 @@ public class DashboardPageController implements Initializable {
     public TextFlow txtChatFlow;
     public StackPane btnSendMsg;
 
-    private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOType.TASK);
+    private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.TASK);
     private final CalendarUtil calendarUtil = new CalendarUtil();
     public MediaView mediaViewer;
     private StringBuilder previousMsg = new StringBuilder();
     private final ChatBotUtil chatBotUtil = new ChatBotUtil();
     private final PromptBuilder promptBuilder = new PromptBuilder();
 
-    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
-    AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOType.ASSIGNMENT);
+    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SUBJECT);
+    AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ASSIGNMENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -25,7 +25,7 @@ public class MainPageController implements Initializable {
 
     private AppContext appContext = AppContext.getInstance();
 
-    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOType.STUDENT);
+    StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

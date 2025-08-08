@@ -37,7 +37,7 @@ public class TaskPageController implements Initializable {
     public TableColumn <TaskTM, String> columnCompletedStatus;
     public Label labelDate;
 
-    private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOType.TASK);
+    private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.TASK);
     private final AppContext appContext = AppContext.getInstance();
 
     @Override

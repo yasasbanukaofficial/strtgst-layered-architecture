@@ -8,7 +8,6 @@ import edu.yb.strtgst.dto.AssignmentDto;
 import edu.yb.strtgst.dto.SubjectDto;
 import edu.yb.strtgst.dto.tm.AssignmentTM;
 import edu.yb.strtgst.util.AlertUtil;
-import edu.yb.strtgst.util.IdLoader;
 import edu.yb.strtgst.util.Navigation;
 import edu.yb.strtgst.util.View;
 import javafx.collections.FXCollections;
@@ -45,8 +44,8 @@ public class AssignmentFormController implements Initializable {
     private ObservableList<String> statusOptions = FXCollections.observableArrayList("Pending", "Completed", "Overdue");
     private ObservableList<String> subjectOptions = FXCollections.observableArrayList();
 
-    AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOType.ASSIGNMENT);
-    AcademicBO academicBO = (AcademicBO) BOFactory.getInstance().getBO(BOFactory.BOType.ACADEMIC);
+    AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ASSIGNMENT);
+    AcademicBO academicBO = (AcademicBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ACADEMIC);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

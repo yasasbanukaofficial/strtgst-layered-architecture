@@ -3,6 +3,8 @@ package edu.yb.strtgst.bo.custom.impl;
 import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.bo.custom.SubjectBO;
+import edu.yb.strtgst.dao.DAOFactory;
+import edu.yb.strtgst.dao.custom.AcademicDAO;
 import edu.yb.strtgst.dao.custom.AssignmentDAO;
 import edu.yb.strtgst.dao.custom.impl.AssignmentDAOImpl;
 import edu.yb.strtgst.db.DBConnection;
@@ -19,8 +21,8 @@ import java.util.ArrayList;
 
 
 public class AssignmentBOImpl implements AssignmentBO {
-    AssignmentDAO assignmentDAO = new AssignmentDAOImpl();
-    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
+    AssignmentDAO assignmentDAO = (AssignmentDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTYPES.ASSIGNMENT);
+    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SUBJECT);
 
     @Override
     public boolean addAssignment(AssignmentDto assignmentDto) throws SQLException {

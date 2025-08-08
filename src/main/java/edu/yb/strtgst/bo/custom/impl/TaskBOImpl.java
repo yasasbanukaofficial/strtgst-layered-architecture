@@ -1,6 +1,8 @@
 package edu.yb.strtgst.bo.custom.impl;
 
 import edu.yb.strtgst.bo.custom.TaskBO;
+import edu.yb.strtgst.dao.DAOFactory;
+import edu.yb.strtgst.dao.custom.AssignmentDAO;
 import edu.yb.strtgst.dao.custom.TaskDAO;
 import edu.yb.strtgst.dao.custom.impl.TaskDAOImpl;
 import edu.yb.strtgst.dto.TaskDto;
@@ -12,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TaskBOImpl implements TaskBO {
-    private final TaskDAO taskDAO = new TaskDAOImpl();
+    TaskDAO taskDAO = (TaskDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTYPES.TASK);
 
     @Override
     public boolean addTask(TaskDto taskDto) throws SQLException {

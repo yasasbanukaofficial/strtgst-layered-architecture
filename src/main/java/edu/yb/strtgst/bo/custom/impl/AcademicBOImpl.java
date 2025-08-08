@@ -3,6 +3,7 @@ package edu.yb.strtgst.bo.custom.impl;
 import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.custom.AcademicBO;
 import edu.yb.strtgst.bo.custom.SubjectBO;
+import edu.yb.strtgst.dao.DAOFactory;
 import edu.yb.strtgst.dao.custom.AcademicDAO;
 import edu.yb.strtgst.dao.custom.impl.AcademicDAOImpl;
 import edu.yb.strtgst.dto.AcademicDto;
@@ -15,8 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AcademicBOImpl implements AcademicBO {
-    AcademicDAO academicDAO = new AcademicDAOImpl();
-    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
+    AcademicDAO academicDAO = (AcademicDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOTYPES.ACADEMIC);
+    SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SUBJECT);
 
     @Override
     public boolean addAcademic(AcademicDto academicDto) throws SQLException {

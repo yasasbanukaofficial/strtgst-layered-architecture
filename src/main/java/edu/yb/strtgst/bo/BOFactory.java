@@ -1,6 +1,5 @@
 package edu.yb.strtgst.bo;
 
-import edu.yb.strtgst.bo.custom.StudentBO;
 import edu.yb.strtgst.bo.custom.impl.AcademicBOImpl;
 import edu.yb.strtgst.bo.custom.impl.AssignmentBOImpl;
 import edu.yb.strtgst.bo.custom.impl.StudentBOImpl;
@@ -16,7 +15,7 @@ public class BOFactory {
         return (boFactory == null) ? boFactory = new BOFactory() : boFactory;
     }
 
-    public enum BOType{
+    public enum BOTypes {
         STUDENT,
         STUDENT_STUDY_SESSIONS,
         SUBJECT,
@@ -27,7 +26,7 @@ public class BOFactory {
         ACADEMIC
     }
 
-    public SuperBO getBO(BOType types){
+    public SuperBO getBO(BOTypes types){
         switch (types){
             case STUDENT:
                 return new StudentBOImpl();

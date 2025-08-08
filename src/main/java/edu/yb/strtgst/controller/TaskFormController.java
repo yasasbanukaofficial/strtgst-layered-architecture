@@ -6,7 +6,6 @@ import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.TaskDto;
 import edu.yb.strtgst.dto.tm.TaskTM;
 import edu.yb.strtgst.util.AlertUtil;
-import edu.yb.strtgst.util.IdLoader;
 import edu.yb.strtgst.util.Navigation;
 import edu.yb.strtgst.util.View;
 import javafx.collections.FXCollections;
@@ -34,7 +33,7 @@ public class TaskFormController implements Initializable {
     public Button btnAddTask;
 
     private TaskDto taskDto;
-    private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOType.TASK);
+    private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.TASK);
     private final AppContext appContext = AppContext.getInstance();
     private final TaskPageController taskPageController = appContext.getTaskPageController();
 
