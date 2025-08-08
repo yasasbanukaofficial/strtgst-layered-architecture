@@ -98,7 +98,7 @@ public class SubjectFormController implements Initializable {
     }
 
     public void addNewSubject(ActionEvent actionEvent) {
-        String subId = loadNextID();
+        String subId = subjectBO.loadNextID("Subject", "subId");
         String subjectName = txtSubjectName.getText();
         String subjectDescription = txtSubjectDescription.getText();
         String subjectMarks = txtMarks.getText();
@@ -199,15 +199,5 @@ public class SubjectFormController implements Initializable {
         btnCancel.setOnAction(e -> {
             deleteSubject(subjectTM);
         });
-    }
-
-    public static String loadNextID(){
-        try {
-            return IdLoader.getNextIdForTwoChar("Subject", "sub_id");
-        } catch (SQLException e) {
-            AlertUtil.setErrorAlert("Error when loading a Grade ID");
-            e.printStackTrace();
-        }
-        return "SU001";
     }
 }

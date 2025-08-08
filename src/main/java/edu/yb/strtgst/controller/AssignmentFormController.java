@@ -1,11 +1,12 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.AssignmentDto;
 import edu.yb.strtgst.dto.SubjectDto;
 import edu.yb.strtgst.dto.tm.AssignmentTM;
 import edu.yb.strtgst.model.AcademicModel;
-import edu.yb.strtgst.model.AssignmentModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.IdLoader;
 import edu.yb.strtgst.util.Navigation;
@@ -38,13 +39,14 @@ public class AssignmentFormController implements Initializable {
     public Label labelCancel;
 
     private AssignmentDto assignmentDto;
-    private final AssignmentModel assignmentModel = new AssignmentModel();
     private final AppContext appContext = AppContext.getInstance();
     private final AssignmentPageController assignmentPageController = appContext.getAssignmentPageController();
     private final AcademicModel academicModel = new AcademicModel();
 
     private ObservableList<String> statusOptions = FXCollections.observableArrayList("Pending", "Completed", "Overdue");
     private ObservableList<String> subjectOptions = FXCollections.observableArrayList();
+
+    AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOType.ASSIGNMENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,7 +75,7 @@ public class AssignmentFormController implements Initializable {
     }
 
     public void addAssignment(ActionEvent event) {
-        String assignment_id = loadNextID();
+        String assignment_id = assignmentBO.loadNextID("Assignment", "assignment_id");
         String assignmentName = txtAssignmentName.getText();
         String assignmentDescription = txtAssignmentDescription.getText();
         String assignmentMarks = txtMarks.getText();
@@ -94,7 +96,7 @@ public class AssignmentFormController implements Initializable {
             );
 
             try {
-                if (assignmentModel.addAssignment(assignmentDto)) {
+                if (assignmentBO.addAssignment(assignmentDto)) {
                     AlertUtil.setInfoAlert("Successfully added an assignment");
                     Navigation.navigateTo(ancAddNewTask, View.DEFAULT_ASSIGNMENT);
                 } else AlertUtil.setErrorAlert("Failed to save an Assignment");
@@ -116,7 +118,7 @@ public class AssignmentFormController implements Initializable {
         if (resp.isPresent() && resp.get() == ButtonType.YES) {
             String assignmentId = assignmentTM.getAssignmentId();
             try {
-                if (assignmentModel.deleteAssignment(assignmentId)) {
+                if (assignmentBO.deleteAssignment(assignmentId)) {
                     assignmentPageController.setupTableColumn();
                     setupFormDefaults();
                     AlertUtil.setInfoAlert("Successfully deleted an assignment");
@@ -151,7 +153,7 @@ public class AssignmentFormController implements Initializable {
             );
 
             try {
-                if (assignmentModel.editAssignment(assignmentDto)) {
+                if (assignmentBO.editAssignment(assignmentDto)) {
                     AlertUtil.setInfoAlert("Successfully edited the assignment");
                     Navigation.navigateTo(ancAddNewTask, View.DEFAULT_ASSIGNMENT);
                 } else AlertUtil.setErrorAlert("Failed to edit the assignment");
@@ -184,16 +186,6 @@ public class AssignmentFormController implements Initializable {
         btnCancel.setText("Delete Assignment");
         btnCancel.getStyleClass().add("button-delete");
         btnCancel.setOnAction(e -> {deleteAssignment(assignmentTM);});
-    }
-
-    public String loadNextID(){
-        try {
-            return IdLoader.getNextID("Assignment", "assignment_id");
-        } catch (SQLException e) {
-            AlertUtil.setErrorAlert("Error when loading a Assignment ID");
-            e.printStackTrace();
-        }
-        return "A001";
     }
 
     private void setupFormDefaults() {

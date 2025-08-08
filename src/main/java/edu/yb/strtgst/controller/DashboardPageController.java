@@ -1,6 +1,7 @@
 package edu.yb.strtgst.controller;
 
 import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.bo.custom.SubjectBO;
 import edu.yb.strtgst.model.*;
 import edu.yb.strtgst.util.AlertUtil;
@@ -35,7 +36,6 @@ public class DashboardPageController implements Initializable {
     public StackPane btnSendMsg;
 
     private final TaskModel taskModel = new TaskModel();
-    private final AssignmentModel assignmentModel = new AssignmentModel();
     private final CalendarModel calendarModel = new CalendarModel();
     public MediaView mediaViewer;
     private StringBuilder previousMsg = new StringBuilder();
@@ -43,6 +43,7 @@ public class DashboardPageController implements Initializable {
     private final PromptBuilder promptBuilder = new PromptBuilder();
 
     SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUBJECT);
+    AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOType.ASSIGNMENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -105,7 +106,7 @@ public class DashboardPageController implements Initializable {
     private void countTotal() {
         try {
             labelTotalTasks.setText(taskModel.getPendingOrOverdueTaskCount());
-            labelTotalAssignments.setText(assignmentModel.getPendingOrOverdueAssignmentCount());
+            labelTotalAssignments.setText(assignmentBO.getPendingOrOverdueAssignmentCount());
             labelEventsToday.setText(calendarModel.getAllFutureEntries("Event"));
             labelLecturesToday.setText(calendarModel.getAllFutureEntries("Lecture"));
         } catch (Exception e) {

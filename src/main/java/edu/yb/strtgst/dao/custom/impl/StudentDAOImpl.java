@@ -111,7 +111,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public String loadNextID() {
+    public String loadNextID(String tableName, String columnName) {
         return "";
     }
 }

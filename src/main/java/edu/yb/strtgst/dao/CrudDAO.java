@@ -19,5 +19,5 @@ public interface CrudDAO<T> extends SuperDAO{
 
     public ArrayList<T> getAll() throws SQLException;
 
-    String loadNextID();
+    String loadNextID(String tableName, String columnName);
 }

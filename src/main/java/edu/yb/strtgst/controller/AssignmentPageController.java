@@ -1,9 +1,10 @@
 package edu.yb.strtgst.controller;
 
+import edu.yb.strtgst.bo.BOFactory;
+import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.AssignmentDto;
 import edu.yb.strtgst.dto.tm.AssignmentTM;
-import edu.yb.strtgst.model.AssignmentModel;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.DateUtil;
 import edu.yb.strtgst.util.Navigation;
@@ -38,8 +39,9 @@ public class AssignmentPageController implements Initializable {
     public TableColumn <AssignmentTM, String> columnCompletedStatus;
     public TableColumn <AssignmentTM, String> columnCompletedMarks;
 
-    private final AssignmentModel assignmentModel = new AssignmentModel();
     private final AppContext appContext = AppContext.getInstance();
+
+    AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOType.ASSIGNMENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -102,7 +104,7 @@ public class AssignmentPageController implements Initializable {
 
     private void loadTableData(){
         try {
-            ArrayList<AssignmentDto> allAssignments = assignmentModel.getAllAssignments();
+            ArrayList<AssignmentDto> allAssignments = assignmentBO.getAllAssignments();
             tblAssignment.setItems(FXCollections.observableArrayList(
                     allAssignments.stream().filter(assignmentDto -> !assignmentDto.getAssignmentStatus().equalsIgnoreCase("Completed"))
                         .map(assignmentDto -> new AssignmentTM(
@@ -166,7 +168,7 @@ public class AssignmentPageController implements Initializable {
     public void updateOverdueStatus() {
         try {
             LocalDate today = LocalDate.now();
-            ArrayList<ArrayList> assignments = assignmentModel.getAllAssignmentStatus();
+            ArrayList<ArrayList> assignments = assignmentBO.getAllAssignmentStatus();
 
             for (ArrayList row : assignments) {
                 String status = row.get(0).toString();
@@ -174,7 +176,7 @@ public class AssignmentPageController implements Initializable {
                 String assignmentId = row.get(2).toString();
 
                 if (status.equals("Pending") && dueDate.isBefore(today)) {
-                    assignmentModel.updateAssignmentStatus(assignmentId, "Overdue");
+                    assignmentBO.updateAssignmentStatus(assignmentId, "Overdue");
                 }
             }
             loadTableData();

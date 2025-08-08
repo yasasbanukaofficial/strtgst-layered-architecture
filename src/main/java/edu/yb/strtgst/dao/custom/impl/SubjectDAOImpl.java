@@ -34,7 +34,7 @@ public class SubjectDAOImpl implements SubjectDAO {
         if (rst.next()){
             return CrudUtil.execute("UPDATE GRADE SET marks = marks + ?, grade = ? WHERE sub_id = ?", newMarks, grade, subId);
         } else {
-            String gradeId = loadNextID();
+            String gradeId = loadNextID("Grade", "grade_id");
             LocalDateTime currentDateTime = LocalDateTime.now();
             return CrudUtil.execute(
                     "INSERT INTO GRADE VALUES (?, ?, ?, ?, ?)",
@@ -84,14 +84,14 @@ public class SubjectDAOImpl implements SubjectDAO {
     }
 
     @Override
-    public String loadNextID(){
+    public String loadNextID(String tableName, String columnName){
         try {
-            return IdLoader.getNextID("Grade", "grade_id");
+            return IdLoader.getNextID(tableName, columnName);
         } catch (SQLException e) {
-            AlertUtil.setErrorAlert("Error when loading a Grade ID");
+            AlertUtil.setErrorAlert("Error when loading a ID");
             e.printStackTrace();
         }
-        return "G001";
+        return null;
     }
 
     @Override

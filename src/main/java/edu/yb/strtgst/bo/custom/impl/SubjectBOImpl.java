@@ -12,7 +12,6 @@ import edu.yb.strtgst.util.IdLoader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class SubjectBOImpl implements SubjectBO {
@@ -131,29 +130,33 @@ public class SubjectBOImpl implements SubjectBO {
     @Override
     public ArrayList<SubjectDto> getAllSubjects() throws SQLException {
         ArrayList <Subject> subjects = subjectDAO.getAll();
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Subject");
         ArrayList<SubjectDto> subjectDtos = new ArrayList<>();
         for (Subject subject : subjects) {
-            SubjectDto subjectDto = new SubjectDto(
+            subjectDtos.add(new SubjectDto(
                     subject.getSubId(),
                     subject.getSubId(),
                     subject.getSubName(),
                     subject.getSubDescription(),
                     subject.getTotalMarks()
-            );
-            subjectDtos.add(subjectDto);
+            ));
         }
         return subjectDtos;
     }
 
     @Override
-    public String loadNextGradeID(){
-        return subjectDAO.loadNextID();
+    public double getGPACalculation() {
+        return subjectDAO.getGPACalculation();
     }
 
     @Override
-    public double getGPACalculation() {
-        return subjectDAO.getGPACalculation();
+    public String loadNextID(String tableName, String columnName){
+        try {
+            return IdLoader.getNextIdForTwoChar(tableName, columnName);
+        } catch (SQLException e) {
+            AlertUtil.setErrorAlert("Error when loading a Id");
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

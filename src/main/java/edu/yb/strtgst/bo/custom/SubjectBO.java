@@ -32,9 +32,9 @@ public interface SubjectBO extends SuperBO {
 
     ArrayList<SubjectDto> getAllSubjects() throws SQLException;
 
-    String loadNextGradeID();
-
     double getGPACalculation();
+
+    String loadNextID(String tableName, String columnName);
 
     double convertMarksToGPA(double marks);
 }
