@@ -9,7 +9,7 @@ public class DAOFactory {
         return (daoFactory == null) ? daoFactory = new DAOFactory() : daoFactory;
     }
     public enum DAOTYPES{
-        ACADEMIC, TASK, SUBJECT, STUDENT, GRADE, ASSIGNMENT;
+        ACADEMIC, TASK, SUBJECT, STUDENT, ASSIGNMENT;
     }
     public SuperDAO getDAO(DAOTYPES daoTypes){
         switch (daoTypes){

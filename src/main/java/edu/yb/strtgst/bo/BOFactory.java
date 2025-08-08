@@ -17,11 +17,8 @@ public class BOFactory {
 
     public enum BOTypes {
         STUDENT,
-        STUDENT_STUDY_SESSIONS,
         SUBJECT,
-        SUBJECT_STUDY_SESSIONS,
         TASK,
-        GRADE,
         ASSIGNMENT,
         ACADEMIC
     }
