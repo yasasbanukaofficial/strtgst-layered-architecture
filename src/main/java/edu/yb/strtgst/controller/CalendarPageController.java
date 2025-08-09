@@ -11,7 +11,7 @@ import com.calendarfx.view.page.MonthPage;
 import com.calendarfx.view.page.WeekPage;
 import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.custom.AcademicBO;
-import edu.yb.strtgst.util.CalendarUtil;
+import edu.yb.strtgst.bo.custom.CalendarBO;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.DateUtil;
 import javafx.application.Platform;
@@ -52,12 +52,12 @@ public class CalendarPageController implements Initializable {
     private final MonthPage monthView = new MonthPage();
     private final AgendaView agendaView = new AgendaView();
 
-    private final CalendarUtil calendarUtil = new CalendarUtil();
     private static ArrayList<CalendarEvent> events = new ArrayList<>();
     private static ArrayList<Entry> entries = new ArrayList<>();
     private boolean isLoading = false;
 
     AcademicBO academicBO = (AcademicBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ACADEMIC);
+    CalendarBO calendarBO = (CalendarBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CALENDAR);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -126,14 +126,14 @@ public class CalendarPageController implements Initializable {
             try {
                 if (entry.getCalendar() == null) {
                     if (matchingEvent != null && matchingEvent.getOldCalendar() != null) {
-                        if (!calendarUtil.deleteEntry(matchingEvent.getOldCalendar().getName(), entry.getId())) {
+                        if (!calendarBO.deleteEntry(matchingEvent.getOldCalendar().getName(), entry.getId())) {
                             AlertUtil.setErrorAlert("Error when deleting entry from the database");
                         }
                     } else {
                         AlertUtil.setErrorAlert("Could not determine old calendar for deleted entry: " + entry.getId());
                     }
                 } else {
-                    if (!calendarUtil.syncEntryWithDatabase(entry)) {
+                    if (!calendarBO.syncEntryWithDatabase(entry)) {
                         AlertUtil.setErrorAlert("Error when modifying an event to the calendar");
                     }
                 }
@@ -155,10 +155,10 @@ public class CalendarPageController implements Initializable {
             eventsCalendar.clear();
             studySessionCalendar.clear();
 
-            loadEntriesForCalendar(examCalendar, calendarUtil.getAllExamEntries());
-            loadEntriesForCalendar(lectureCalendar, calendarUtil.getAllLectureEntries());
-            loadEntriesForCalendar(eventsCalendar, calendarUtil.getAllEventEntries());
-            loadEntriesForCalendar(studySessionCalendar, calendarUtil.getAllStudySessionEntries());
+            loadEntriesForCalendar(examCalendar, calendarBO.getAllExamEntries());
+            loadEntriesForCalendar(lectureCalendar, calendarBO.getAllLectureEntries());
+            loadEntriesForCalendar(eventsCalendar, calendarBO.getAllEventEntries());
+            loadEntriesForCalendar(studySessionCalendar, calendarBO.getAllStudySessionEntries());
 
             refreshViews();
         } catch (SQLException e) {
@@ -226,7 +226,7 @@ public class CalendarPageController implements Initializable {
 
             String response;
             if (isValid) {
-                boolean isSynced = calendarUtil.syncEntryByAi(aiResponse);
+                boolean isSynced = calendarBO.syncEntryByAi(aiResponse);
                 response = isSynced ?
                         "Your event is successfully added. Add some more!" :
                         "Failed to add an event. Try with a stable internet connection.";

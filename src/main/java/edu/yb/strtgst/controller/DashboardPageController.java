@@ -1,10 +1,7 @@
 package edu.yb.strtgst.controller;
 
 import edu.yb.strtgst.bo.BOFactory;
-import edu.yb.strtgst.bo.custom.AcademicBO;
-import edu.yb.strtgst.bo.custom.AssignmentBO;
-import edu.yb.strtgst.bo.custom.SubjectBO;
-import edu.yb.strtgst.bo.custom.TaskBO;
+import edu.yb.strtgst.bo.custom.*;
 import edu.yb.strtgst.util.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -13,7 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -33,13 +29,13 @@ public class DashboardPageController implements Initializable {
     public TextFlow txtChatFlow;
     public StackPane btnSendMsg;
 
-    private final CalendarUtil calendarUtil = new CalendarUtil();
     private StringBuilder previousMsg = new StringBuilder();
 
     SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SUBJECT);
     AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ASSIGNMENT);
     TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.TASK);
     AcademicBO academicBO = (AcademicBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ACADEMIC);
+    CalendarBO calendarBO = (CalendarBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.CALENDAR);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,8 +76,8 @@ public class DashboardPageController implements Initializable {
         try {
             labelTotalTasks.setText(taskBO.getPendingOrOverdueTaskCount());
             labelTotalAssignments.setText(assignmentBO.getPendingOrOverdueAssignmentCount());
-            labelEventsToday.setText(calendarUtil.getAllFutureEntries("Event"));
-            labelLecturesToday.setText(calendarUtil.getAllFutureEntries("Lecture"));
+            labelEventsToday.setText(calendarBO.getAllFutureEntries("Event"));
+            labelLecturesToday.setText(calendarBO.getAllFutureEntries("Lecture"));
         } catch (Exception e) {
             AlertUtil.setErrorAlert("Error when fetching total");
             e.printStackTrace();

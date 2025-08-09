@@ -1,10 +1,6 @@
 package edu.yb.strtgst.bo;
 
-import edu.yb.strtgst.bo.custom.impl.AcademicBOImpl;
-import edu.yb.strtgst.bo.custom.impl.AssignmentBOImpl;
-import edu.yb.strtgst.bo.custom.impl.StudentBOImpl;
-import edu.yb.strtgst.bo.custom.impl.SubjectBOImpl;
-import edu.yb.strtgst.bo.custom.impl.TaskBOImpl;
+import edu.yb.strtgst.bo.custom.impl.*;
 
 public class BOFactory {
     private static BOFactory boFactory;
@@ -20,7 +16,8 @@ public class BOFactory {
         SUBJECT,
         TASK,
         ASSIGNMENT,
-        ACADEMIC
+        ACADEMIC,
+        CALENDAR
     }
 
     public SuperBO getBO(BOTypes types){
@@ -35,6 +32,8 @@ public class BOFactory {
                 return new AcademicBOImpl();
             case TASK:
                 return new TaskBOImpl();
+            case CALENDAR:
+                return new CalendarBOImpl();
             default:
                 return null;
         }
