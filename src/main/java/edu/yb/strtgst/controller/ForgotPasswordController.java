@@ -30,7 +30,6 @@ public class ForgotPasswordController {
 
     private int otpCode;
     private static String userEmail = "";
-    private final AuthenticationUtil forgotPasswordModel = new AuthenticationUtil();
     private final String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\\-_*])[a-zA-Z0-9@#$%^&+=.\\-_]{6,}$";
     private final String errorStyle = "-fx-border-color: #ce0101; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-radius: 10px";
     private final String normalStyle = "-fx-border-color: #000000; -fx-border-radius: 10px; -fx-border-width: 2px; -fx-background-radius: 10px";
@@ -40,7 +39,7 @@ public class ForgotPasswordController {
         Random random = new Random();
         otpCode = random.nextInt(9000) + 1000;
         try {
-            boolean isEmailExisting = forgotPasswordModel.checkIfEmailExisting(userEmail);
+            boolean isEmailExisting = AuthenticationUtil.checkIfEmailExisting(userEmail);
             if (!isEmailExisting){
                 AlertUtil.setErrorAlert("Your email was not found in the database. Please try again!");
                 return;
