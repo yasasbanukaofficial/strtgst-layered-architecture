@@ -31,7 +31,6 @@ public class SubjectFormController implements Initializable {
     public Button btnCancel;
     public Button btnAddSubject;
 
-    private SubjectDto subjectDto;
     private static final AppContext appContext = AppContext.getInstance();
     private final SubjectPageController subjectPageController = appContext.getSubjectPageController();
     private static String studId = "";
@@ -104,16 +103,14 @@ public class SubjectFormController implements Initializable {
 
         setButtonStates(false);
         if (validateSubjectFields(subjectMarks)) {
-            subjectDto = new SubjectDto(
-                    subId,
-                    studId,
-                    subjectName,
-                    subjectDescription,
-                    subjectMarks
-            );
-
             try {
-                if (subjectBO.addSubject(subjectDto)) {
+                if (subjectBO.addSubject(new SubjectDto(
+                        subId,
+                        studId,
+                        subjectName,
+                        subjectDescription,
+                        subjectMarks
+                ))) {
                     AlertUtil.setInfoAlert("Successfully added a subject");
                     Navigation.navigateTo(ancAddNewSubject, View.DEFAULT_SUBJECT);
                     subjectPageController.loadTableData();
@@ -155,16 +152,14 @@ public class SubjectFormController implements Initializable {
 
         setButtonStates(false);
         if (validateSubjectFields(subjectMarks)) {
-            subjectDto = new SubjectDto(
-                    subId,
-                    studId,
-                    subjectName,
-                    subjectDescription,
-                    subjectMarks
-            );
-
             try {
-                if (subjectBO.editSubject(subjectDto)) {
+                if (subjectBO.editSubject(new SubjectDto(
+                        subId,
+                        studId,
+                        subjectName,
+                        subjectDescription,
+                        subjectMarks
+                ))) {
                     AlertUtil.setInfoAlert("Successfully edited the subject");
                     Navigation.navigateTo(ancAddNewSubject, View.DEFAULT_SUBJECT);
                     subjectPageController.loadTableData();
