@@ -14,7 +14,6 @@ import edu.yb.strtgst.bo.custom.AcademicBO;
 import edu.yb.strtgst.util.CalendarUtil;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.DateUtil;
-import edu.yb.strtgst.util.PromptBuilder;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -221,7 +220,7 @@ public class CalendarPageController implements Initializable {
                 return;
             }
 
-            String aiResponse = academicBO.getResponse(PromptBuilder.buildSqlInsertPrompt(userInput));
+            String aiResponse = academicBO.buildSqlInsertPrompt(userInput);
 
             boolean isValid = aiResponse != null && aiResponse.trim().toLowerCase().startsWith("insert into");
 

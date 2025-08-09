@@ -18,4 +18,7 @@ public interface AcademicBO extends SuperBO {
     ArrayList<SubjectDto> getAllSubjects() throws SQLException;
     String loadNextID(String tableName, String columnName);
     public String getResponse(String instructions);
+    public String buildSqlInsertPrompt(String userInput);
+    public String askAboutStudies(String userInput, StringBuilder previousMsg);
+    public String reminderGenerator();
 }

@@ -127,4 +127,19 @@ public class AcademicBOImpl implements AcademicBO {
     public String getResponse(String instructions){
         return academicDAO.getResponse(instructions);
     }
+
+    @Override
+    public String buildSqlInsertPrompt(String userInput) {
+        return academicDAO.buildSqlInsertPrompt(userInput);
+    }
+
+    @Override
+    public String askAboutStudies(String userInput, StringBuilder previousMsg) {
+        return academicDAO.askAboutStudies(userInput, previousMsg);
+    }
+
+    @Override
+    public String reminderGenerator() {
+        return academicDAO.reminderGenerator();
+    }
 }

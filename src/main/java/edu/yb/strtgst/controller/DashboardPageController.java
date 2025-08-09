@@ -35,7 +35,6 @@ public class DashboardPageController implements Initializable {
 
     private final CalendarUtil calendarUtil = new CalendarUtil();
     private StringBuilder previousMsg = new StringBuilder();
-    private final PromptBuilder promptBuilder = new PromptBuilder();
 
     SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SUBJECT);
     AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ASSIGNMENT);
@@ -96,7 +95,7 @@ public class DashboardPageController implements Initializable {
             AlertUtil.setErrorAlert("Please enter a valid entry message to send");
             return;
         }
-        String response = academicBO.getResponse(promptBuilder.askAboutStudies(userInput, previousMsg));
+        String response = academicBO.askAboutStudies(userInput, previousMsg);
         Text userTxt = new Text("User:      " + userInput + "\n");
         Text responseTxt = new Text("Chat:      " + response);
         txtChatFlow.getChildren().add(userTxt);
