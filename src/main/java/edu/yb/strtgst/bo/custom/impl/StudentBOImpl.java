@@ -41,10 +41,10 @@ public class StudentBOImpl implements StudentBO {
         Student student = studentDAO.getEntity(username);
         return new StudentDto(
                 student.getStudId(),
+                student.getStudName(),
                 student.getUsername(),
                 student.getEmail(),
                 student.getPassword(),
-                student.getStudName(),
                 student.getDateOfBirth()
         );
     }
@@ -54,7 +54,14 @@ public class StudentBOImpl implements StudentBO {
     }
 
     public boolean updateStudent(StudentDto studentDto) throws SQLException {
-        return studentDAO.updateEntity(new Student(studentDto.getStudId(), studentDto.getUsername(), studentDto.getEmail(), studentDto.getPassword()));
+        return studentDAO.updateEntity(new Student(
+                studentDto.getStudId(),
+                studentDto.getStudName(),
+                studentDto.getUsername(),
+                studentDto.getEmail(),
+                studentDto.getPassword(),
+                studentDto.getDateOfBirth()
+        ));
 
     }
 

@@ -28,6 +28,14 @@ public class Student implements Serializable {
         this.password = password;
     }
 
+    public Student(String studId, String studName, String username, String email, String password) {
+        this.studId = studId;
+        this.studName = studName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     public Student(String studId, String studName, String username, String email, String password, LocalDate dateOfBirth) {
         this.studId = studId;
         this.studName = studName;

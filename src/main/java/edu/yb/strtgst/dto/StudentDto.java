@@ -27,6 +27,14 @@ public class StudentDto {
         this.password = password;
     }
 
+    public StudentDto(String studId, String studName, String username, String email, String password) {
+        this.studId = studId;
+        this.studName = studName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     public StudentDto(String studId, String studName, String username, String email, String password, LocalDate dateOfBirth) {
         this.studId = studId;
         this.studName = studName;

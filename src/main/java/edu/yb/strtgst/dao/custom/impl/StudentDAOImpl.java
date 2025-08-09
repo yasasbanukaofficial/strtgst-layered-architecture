@@ -27,9 +27,11 @@ public class StudentDAOImpl implements StudentDAO {
         if (rst.next()){
             return new Student(
                     rst.getString(1),
+                    rst.getString(2),
                     rst.getString(3),
                     rst.getString(4),
-                    rst.getString(5)
+                    rst.getString(5),
+                    rst.getDate(6).toLocalDate()
             );
         }
         return null;

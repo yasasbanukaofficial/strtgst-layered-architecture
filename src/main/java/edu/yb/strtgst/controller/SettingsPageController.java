@@ -104,6 +104,9 @@ public class SettingsPageController implements Initializable {
     }
 
     private String getStudentAge(LocalDate birthDate) {
+        if (birthDate == null) {
+            return "Not set";
+        }
         int age = LocalDate.now().getYear() - birthDate.getYear();
         if (birthDate.getMonthValue() > LocalDate.now().getMonthValue() || birthDate.getDayOfYear() > LocalDate.now().getDayOfYear()) {
             --age;
