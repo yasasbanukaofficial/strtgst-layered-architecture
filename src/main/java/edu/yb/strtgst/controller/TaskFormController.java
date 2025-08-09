@@ -32,7 +32,6 @@ public class TaskFormController implements Initializable {
     public Button btnCancelTask;
     public Button btnAddTask;
 
-    private TaskDto taskDto;
     private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.TASK);
     private final AppContext appContext = AppContext.getInstance();
     private final TaskPageController taskPageController = appContext.getTaskPageController();
@@ -57,16 +56,14 @@ public class TaskFormController implements Initializable {
         String status = cmbStatus.getValue();
         setButtonStates(false);
         if (validateTaskFields(taskName, status, dueDate)) {
-             taskDto = new TaskDto(
-                    task_id,
-                    taskName,
-                    taskDescription,
-                    dueDate,
-                    status
-            );
-
             try {
-                if (taskBO.addTask(taskDto)) {
+                if (taskBO.addTask(new TaskDto(
+                        task_id,
+                        taskName,
+                        taskDescription,
+                        dueDate,
+                        status
+                ))) {
                     AlertUtil.setInfoAlert("Successfully added a task");
                     Navigation.navigateTo(ancAddNewTask, View.DEFAULT_TASK);
                 } else AlertUtil.setErrorAlert("Failed to save the task");
@@ -102,7 +99,7 @@ public class TaskFormController implements Initializable {
         }
     }
 
-    private void editAssignment(TaskTM taskTM) {
+    private void editTask(TaskTM taskTM) {
         String task_id = taskTM.getTaskId();
         String taskName = txtTaskName.getText();
         String taskDescription = txtTaskDescription.getText();
@@ -111,16 +108,14 @@ public class TaskFormController implements Initializable {
 
         setButtonStates(false);
         if (validateTaskFields(taskName, status, dueDate)) {
-            taskDto = new TaskDto(
-                    task_id,
-                    taskName,
-                    taskDescription,
-                    dueDate,
-                    status
-            );
-
             try {
-                if (taskBO.editTask(taskDto)) {
+                if (taskBO.editTask(new TaskDto(
+                        task_id,
+                        taskName,
+                        taskDescription,
+                        dueDate,
+                        status
+                ))) {
                     AlertUtil.setInfoAlert("Successfully edited the task");
                     Navigation.navigateTo(ancAddNewTask, View.DEFAULT_TASK);
                 } else AlertUtil.setErrorAlert("Failed to edit the task");
@@ -146,7 +141,8 @@ public class TaskFormController implements Initializable {
         });
 
         btnAddTask.setText("Edit Task");
-        btnAddTask.setOnAction(e -> {editAssignment(taskTM);});
+        btnAddTask.setOnAction(e -> {
+            editTask(taskTM);});
 
         btnCancelTask.setText("Delete Task");
         btnCancelTask.getStyleClass().add("button-delete");
