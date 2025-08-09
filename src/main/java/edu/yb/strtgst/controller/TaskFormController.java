@@ -4,7 +4,7 @@ import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.custom.TaskBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.TaskDto;
-import edu.yb.strtgst.view.tm.TaskTM;
+import edu.yb.strtgst.view.TaskTM;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.Navigation;
 import edu.yb.strtgst.util.View;

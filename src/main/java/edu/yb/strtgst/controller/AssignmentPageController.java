@@ -4,7 +4,7 @@ import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.context.AppContext;
 import edu.yb.strtgst.dto.AssignmentDto;
-import edu.yb.strtgst.view.tm.AssignmentTM;
+import edu.yb.strtgst.view.AssignmentTM;
 import edu.yb.strtgst.util.AlertUtil;
 import edu.yb.strtgst.util.DateUtil;
 import edu.yb.strtgst.util.Navigation;
