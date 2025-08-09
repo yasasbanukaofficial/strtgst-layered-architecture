@@ -21,8 +21,7 @@ public class SignUpController {
     public TextField txtEmail;
     public PasswordField txtPassword;
 
-    private final AppContext appContext = AppContext.getInstance();
-    private final IntroPageController introPageController = appContext.getIntroPageController();
+    private final IntroPageController introPageController = AppContext.getInstance().getIntroPageController();
     private final String usernamePattern = "^[a-zA-Z0-9_-]{3,}$";
     private final String emailPattern = "^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$";
     private final String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\\-_*])[a-zA-Z0-9@#$%^&+=.\\-_]{6,}$";
@@ -42,7 +41,7 @@ public class SignUpController {
             try {
                 if (studentBO.addStudent(studentDto)) {
                     AlertUtil.setInfoAlert("Successfully Saved user");
-                    appContext.setUsername(username);
+                    AppContext.getInstance().setUsername(username);
                     introPageController.visitDashboard();
                 } else { AlertUtil.setErrorAlert("Failed when saving user"); }
             } catch (Exception e) {

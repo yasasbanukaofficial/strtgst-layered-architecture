@@ -33,14 +33,13 @@ public class TaskFormController implements Initializable {
     public Button btnAddTask;
 
     private final TaskBO taskBO = (TaskBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.TASK);
-    private final AppContext appContext = AppContext.getInstance();
-    private final TaskPageController taskPageController = appContext.getTaskPageController();
+    private final TaskPageController taskPageController = AppContext.getInstance().getTaskPageController();
 
     private ObservableList<String> statusOptions = FXCollections.observableArrayList("Pending", "Completed", "Overdue");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        appContext.setTaskFormController(this);
+        AppContext.getInstance().setTaskFormController(this);
         setupFormDefaults();
     }
 

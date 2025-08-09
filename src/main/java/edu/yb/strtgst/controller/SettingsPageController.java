@@ -32,8 +32,7 @@ public class SettingsPageController implements Initializable {
     public Button btnCancel;
 
     private StudentDto studentDetails;
-    private final AppContext appContext = AppContext.getInstance();
-    private final MainPageController mainPageController = appContext.getMainPageController();
+    private final MainPageController mainPageController = AppContext.getInstance().getMainPageController();
     private final String usernamePattern = "^[a-zA-Z0-9_-]{3,}$";
     private final String emailPattern = "^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$";
     private final String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\\-_*])[a-zA-Z0-9@#$%^&+=.\\-_]{6,}$";
@@ -60,7 +59,7 @@ public class SettingsPageController implements Initializable {
 
     private void initializeData() {
         try {
-            studentDetails = studentBO.fetchStudentDetails(appContext.getUsername());
+            studentDetails = studentBO.fetchStudentDetails(AppContext.getInstance().getUsername());
             if (studentDetails == null) {
                 AlertUtil.setErrorAlert("Error when fetching student details");
                 return;
@@ -92,7 +91,7 @@ public class SettingsPageController implements Initializable {
             try {
                 if (studentBO.updateStudent(studentDto)) {
                     AlertUtil.setInfoAlert("Successfully made changes");
-                    appContext.setUsername(username);
+                    AppContext.getInstance().setUsername(username);
                     mainPageController.setUpLabels();
                     setFieldDefaults(studentDto);
                     this.studentDetails = studentDto;

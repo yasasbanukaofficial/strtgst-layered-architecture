@@ -43,8 +43,6 @@ public class SubjectPageController implements Initializable {
     public TableColumn<SubjectTM, String> columnSubjectMarks;
     public TableColumn<SubjectTM, String> columnSubjectGrade;
 
-    private final AppContext appContext = AppContext.getInstance();
-
     SubjectBO subjectBO = (SubjectBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.SUBJECT);
 
     @Override
@@ -52,7 +50,7 @@ public class SubjectPageController implements Initializable {
         setupTableColumn();
         loadTableData();
         updateDateLabel();
-        appContext.setSubjectPageController(this);
+        AppContext.getInstance().setSubjectPageController(this);
         Navigation.navigateTo(ancSubjectContainer, View.DEFAULT_SUBJECT);
     }
 
@@ -124,7 +122,7 @@ public class SubjectPageController implements Initializable {
     public void onClickSubjectTable(MouseEvent mouseEvent) {
         Navigation.navigateTo(ancSubjectContainer, View.ADD_SUBJECT);
         SubjectTM selectedSubject = tblSubject.getSelectionModel().getSelectedItem();
-        SubjectFormController subjectFormController = appContext.getSubjectFormController();
+        SubjectFormController subjectFormController = AppContext.getInstance().getSubjectFormController();
         if (selectedSubject != null){
             subjectFormController.populateFormForEdit(selectedSubject);
         }

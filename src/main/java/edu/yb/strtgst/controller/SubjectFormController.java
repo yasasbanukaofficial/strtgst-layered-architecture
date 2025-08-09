@@ -31,8 +31,7 @@ public class SubjectFormController implements Initializable {
     public Button btnCancel;
     public Button btnAddSubject;
 
-    private static final AppContext appContext = AppContext.getInstance();
-    private final SubjectPageController subjectPageController = appContext.getSubjectPageController();
+    private final SubjectPageController subjectPageController = AppContext.getInstance().getSubjectPageController();
     private static String studId = "";
 
     StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
@@ -40,10 +39,10 @@ public class SubjectFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        appContext.setSubjectFormController(this);
+        AppContext.getInstance().setSubjectFormController(this);
         setupFormDefaults();
         try {
-            studId = studentBO.getStudentIdByUsername(appContext.getUsername());
+            studId = studentBO.getStudentIdByUsername(AppContext.getInstance().getUsername());
         } catch (Exception e) {
             AlertUtil.setErrorAlert("Error when finding student ID");
         }

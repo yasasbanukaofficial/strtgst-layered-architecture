@@ -23,20 +23,18 @@ public class MainPageController implements Initializable {
     public Label txtUsername;
     public MediaView mediaViewer;
 
-    private AppContext appContext = AppContext.getInstance();
-
     StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        appContext.setMainPageController(this);
+        AppContext.getInstance().setMainPageController(this);
         stopAndNavigate(ancTabDisplay, View.DASHBOARD);
         setUpLabels();
     }
 
     public void setUpLabels() {
         try {
-            String username = appContext.getUsername();
+            String username = AppContext.getInstance().getUsername();
             txtUsername.setText("@" + username);
             txtStudentName.setText(studentBO.fetchStudentName(username));
         } catch (SQLException e) {

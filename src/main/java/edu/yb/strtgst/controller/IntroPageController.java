@@ -23,7 +23,6 @@ public class IntroPageController implements Initializable {
     public Label lblComment;
     public Button btnExit;
 
-    private final AppContext appContext = AppContext.getInstance();
 
     public Button btnLogin;
     public Button btnSignUp;
@@ -37,7 +36,7 @@ public class IntroPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playBackgroundVideo();
         setVisibility(false);
-        appContext.setIntroPageController(this);
+        AppContext.getInstance().setIntroPageController(this);
     }
 
     private void setVisibility(boolean visibility) {

@@ -24,8 +24,7 @@ public class LoginFormController {
     public TextField txtUsername;
     public PasswordField txtPassword;
 
-    private final AppContext appContext = AppContext.getInstance();
-    private final IntroPageController introPageController = appContext.getIntroPageController();
+    private final IntroPageController introPageController = AppContext.getInstance().getIntroPageController();
     public Button btnForgotPassword;
 
     StudentBO studentBO = (StudentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.STUDENT);
@@ -41,7 +40,7 @@ public class LoginFormController {
 
         try {
             if (validateCredentials(username, password)) {
-                appContext.setUsername(username);
+                AppContext.getInstance().setUsername(username);
                 introPageController.visitDashboard();
             } else {
                 AlertUtil.setErrorAlert("Invalid username or password. Please Try again!");

@@ -37,18 +37,18 @@ public class AssignmentFormController implements Initializable {
     public Label labelAssignmentHeader;
     public Label labelCancel;
 
-    private final AppContext appContext = AppContext.getInstance();
-    private final AssignmentPageController assignmentPageController = appContext.getAssignmentPageController();
 
     private ObservableList<String> statusOptions = FXCollections.observableArrayList("Pending", "Completed", "Overdue");
     private ObservableList<String> subjectOptions = FXCollections.observableArrayList();
+
+    private AssignmentPageController assignmentPageController = AppContext.getInstance().getAssignmentPageController();
 
     AssignmentBO assignmentBO = (AssignmentBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ASSIGNMENT);
     AcademicBO academicBO = (AcademicBO) BOFactory.getInstance().getBO(BOFactory.BOTypes.ACADEMIC);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        appContext.setAssignmentFormController(this);
+        AppContext.getInstance().setAssignmentFormController(this);
         loadSubjects();
         setupFormDefaults();
     }
