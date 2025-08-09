@@ -1,6 +1,6 @@
 package edu.yb.strtgst.controller;
 
-import edu.yb.strtgst.context.AppContext;
+import edu.yb.strtgst.controller.context.AppContext;
 import edu.yb.strtgst.util.Navigation;
 import edu.yb.strtgst.util.View;
 import javafx.event.ActionEvent;

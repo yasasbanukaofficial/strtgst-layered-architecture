@@ -1,4 +1,4 @@
-package edu.yb.strtgst.context;
+package edu.yb.strtgst.controller.context;
 
 import edu.yb.strtgst.controller.*;
 import edu.yb.strtgst.controller.AssignmentPageController;

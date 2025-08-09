@@ -2,7 +2,7 @@ package edu.yb.strtgst.controller;
 
 import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.custom.TaskBO;
-import edu.yb.strtgst.context.AppContext;
+import edu.yb.strtgst.controller.context.AppContext;
 import edu.yb.strtgst.dto.TaskDto;
 import edu.yb.strtgst.view.TaskTM;
 import edu.yb.strtgst.util.AlertUtil;
