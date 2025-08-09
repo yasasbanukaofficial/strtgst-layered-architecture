@@ -23,7 +23,7 @@
 
 | UI / Frontend | Architecture | Database | Language | AI/ML             |
 |---------------|--------------|----------|----------|-------------------|
-| JavaFX        | MVC          | MySQL    | Java     | Google Gemini API |
+| JavaFX        | Layered      | MySQL    | Java     | Google Gemini API |
 
 ---
 
