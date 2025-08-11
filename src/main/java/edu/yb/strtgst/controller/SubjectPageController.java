@@ -154,10 +154,8 @@ public class SubjectPageController implements Initializable {
             Connection connection = DBConnection.getInstance().getConnection();
             Map<String, Object> parameters = new HashMap<>();
 
-            // 💡 VERY IMPORTANT: manually set the REPORT_CONNECTION parameter
             parameters.put("REPORT_CONNECTION", connection);
 
-            // 💡 Use JREmptyDataSource for outer report (since there's no main query)
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
 
             JasperViewer.viewReport(jasperPrint, false);
