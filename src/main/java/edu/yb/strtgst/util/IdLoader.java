@@ -1,11 +1,13 @@
 package edu.yb.strtgst.util;
 
+import edu.yb.strtgst.dao.SQLUtil;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class IdLoader {
     public static String getNextID(String tableName, String idColumn) throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT " + idColumn + " FROM " + tableName + " ORDER BY " + idColumn + " DESC LIMIT 1");
+        ResultSet rst = SQLUtil.execute("SELECT " + idColumn + " FROM " + tableName + " ORDER BY " + idColumn + " DESC LIMIT 1");
         char firstCharacter = tableName.charAt(0);
 
         if (rst.next()){
@@ -21,7 +23,7 @@ public class IdLoader {
 
     // Build Specifically fo Subject Table
     public static String getNextIdForTwoChar(String tableName, String idColumn) throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT " + idColumn + " FROM " + tableName + " ORDER BY " + idColumn + " DESC LIMIT 1");
+        ResultSet rst = SQLUtil.execute("SELECT " + idColumn + " FROM " + tableName + " ORDER BY " + idColumn + " DESC LIMIT 1");
         String idCharacter = tableName.charAt(0) + "U";
 
         if (rst.next()){
@@ -35,7 +37,7 @@ public class IdLoader {
         return idCharacter + "001";
     }
     public static String fetchIdByName(String tableName, String idColumn, String name) throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT " + idColumn + " FROM " + tableName + "WHERE sub_name = " + name + " ORDER BY sub_name DESC LIMIT 1");
+        ResultSet rst = SQLUtil.execute("SELECT " + idColumn + " FROM " + tableName + "WHERE sub_name = " + name + " ORDER BY sub_name DESC LIMIT 1");
 
         if (rst.next()){
             String subId = rst.getString(1);

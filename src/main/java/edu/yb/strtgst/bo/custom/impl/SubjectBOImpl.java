@@ -2,18 +2,15 @@ package edu.yb.strtgst.bo.custom.impl;
 
 import edu.yb.strtgst.bo.custom.SubjectBO;
 import edu.yb.strtgst.dao.DAOFactory;
-import edu.yb.strtgst.dao.custom.AssignmentDAO;
 import edu.yb.strtgst.dao.custom.SubjectDAO;
-import edu.yb.strtgst.dao.custom.impl.SubjectDAOImpl;
 import edu.yb.strtgst.db.DBConnection;
 import edu.yb.strtgst.dto.SubjectDto;
 import edu.yb.strtgst.entity.Subject;
 import edu.yb.strtgst.util.AlertUtil;
-import edu.yb.strtgst.util.CrudUtil;
+import edu.yb.strtgst.dao.SQLUtil;
 import edu.yb.strtgst.util.IdLoader;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -73,7 +70,7 @@ public class SubjectBOImpl implements SubjectBO {
         Connection connection = DBConnection.getInstance().getConnection();
         try {
             connection.setAutoCommit(false);
-            boolean isSubMarksUpdated = CrudUtil.execute(
+            boolean isSubMarksUpdated = SQLUtil.execute(
                     "UPDATE Subject SET sub_name = ?, description = ?, total_marks = ? WHERE sub_id = ?",
                     subjectDto.getSubName(),
                     subjectDto.getSubDescription(),
@@ -104,7 +101,7 @@ public class SubjectBOImpl implements SubjectBO {
         Connection connection = DBConnection.getInstance().getConnection();
         try {
             connection.setAutoCommit(false);
-            boolean isSubDeleted = CrudUtil.execute("DELETE FROM Subject WHERE sub_id = ?", subjectId);
+            boolean isSubDeleted = SQLUtil.execute("DELETE FROM Subject WHERE sub_id = ?", subjectId);
             if (isSubDeleted) {
                 boolean isGradeDeleted = subjectDAO.deleteGrade(subjectId);
                 if (isGradeDeleted) {

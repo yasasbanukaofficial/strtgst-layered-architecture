@@ -1,16 +1,9 @@
 package edu.yb.strtgst.bo.custom;
 
 import edu.yb.strtgst.bo.SuperBO;
-import edu.yb.strtgst.db.DBConnection;
 import edu.yb.strtgst.dto.SubjectDto;
-import edu.yb.strtgst.util.AlertUtil;
-import edu.yb.strtgst.util.CrudUtil;
-import edu.yb.strtgst.util.IdLoader;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public interface SubjectBO extends SuperBO {

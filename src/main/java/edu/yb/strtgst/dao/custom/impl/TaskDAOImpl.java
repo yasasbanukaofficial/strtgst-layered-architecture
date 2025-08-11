@@ -3,7 +3,7 @@ package edu.yb.strtgst.dao.custom.impl;
 import edu.yb.strtgst.dao.custom.TaskDAO;
 import edu.yb.strtgst.entity.Task;
 import edu.yb.strtgst.util.AlertUtil;
-import edu.yb.strtgst.util.CrudUtil;
+import edu.yb.strtgst.dao.SQLUtil;
 import edu.yb.strtgst.util.IdLoader;
 
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public boolean addEntity(Task entity) throws SQLException {
-        return CrudUtil.execute(
+        return SQLUtil.execute(
                 "INSERT INTO Tasks VALUES (?, ?, ?, ?, ?)",
                 entity.getTaskId(),
                 entity.getTaskName(),
@@ -26,7 +26,7 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public Task getEntity(String id) throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Tasks WHERE task_id = ?", id);
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Tasks WHERE task_id = ?", id);
         if (rst.next()) {
             return new Task(
                     rst.getString(1),
@@ -41,7 +41,7 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public boolean updateEntity(Task entity) throws SQLException {
-        return CrudUtil.execute(
+        return SQLUtil.execute(
                 "UPDATE Tasks SET task_name = ?, task_description = ?, due_date = ?, status = ? WHERE task_id = ?",
                 entity.getTaskName(),
                 entity.getTaskDescription(),
@@ -58,7 +58,7 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public boolean deleteEntity(String id) throws SQLException {
-        return CrudUtil.execute("DELETE FROM Tasks WHERE task_id = ?", id);
+        return SQLUtil.execute("DELETE FROM Tasks WHERE task_id = ?", id);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public ArrayList<Task> getAll() throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Tasks");
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Tasks");
 
         ArrayList<Task> tasks = new ArrayList<>();
         while (rst.next()) {
@@ -98,7 +98,7 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public ArrayList<ArrayList> getAllTaskStatus() throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT status, due_date, task_id FROM Tasks");
+        ResultSet rst = SQLUtil.execute("SELECT status, due_date, task_id FROM Tasks");
         ArrayList<ArrayList> list = new ArrayList<>();
 
         while (rst.next()) {
@@ -113,7 +113,7 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public boolean updateTaskStatus(String taskId, String newStatus) throws SQLException {
-        return CrudUtil.execute(
+        return SQLUtil.execute(
                 "UPDATE Tasks SET status = ? WHERE task_id = ?",
                 newStatus, taskId
         );
@@ -121,7 +121,7 @@ public class TaskDAOImpl implements TaskDAO {
 
     @Override
     public String getPendingOrOverdueTaskCount() throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT COUNT(*) FROM Tasks WHERE status = 'Pending' OR status = 'Overdue'");
+        ResultSet rst = SQLUtil.execute("SELECT COUNT(*) FROM Tasks WHERE status = 'Pending' OR status = 'Overdue'");
         if (rst.next()){
             return rst.getString(1);
         }

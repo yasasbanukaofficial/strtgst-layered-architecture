@@ -1,14 +1,8 @@
 package edu.yb.strtgst.bo.custom;
 
-import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.SuperBO;
-import edu.yb.strtgst.db.DBConnection;
 import edu.yb.strtgst.dto.AssignmentDto;
-import edu.yb.strtgst.util.AlertUtil;
-import edu.yb.strtgst.util.CrudUtil;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

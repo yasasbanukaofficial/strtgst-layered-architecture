@@ -1,4 +1,4 @@
-package edu.yb.strtgst.util;
+package edu.yb.strtgst.dao;
 
 import edu.yb.strtgst.db.DBConnection;
 
@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CrudUtil {
+public class SQLUtil {
     public static <T> T execute(String sql, Object... obj) throws SQLException{
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement pst = connection.prepareStatement(sql);

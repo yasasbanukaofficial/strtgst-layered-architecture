@@ -2,7 +2,7 @@ package edu.yb.strtgst.dao.custom.impl;
 
 import com.calendarfx.model.Entry;
 import edu.yb.strtgst.dao.custom.CalendarDAO;
-import edu.yb.strtgst.util.CrudUtil;
+import edu.yb.strtgst.dao.SQLUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,13 +26,13 @@ public class CalendarDAOImpl implements CalendarDAO {
             String tableName = calendarTableNames[i];
             String idColumn = calendarTableIdColumns[i];
 
-            ResultSet rst = CrudUtil.execute(
+            ResultSet rst = SQLUtil.execute(
                     "SELECT 1 FROM " + tableName + " WHERE " + idColumn + " = ?", entryId
             );
 
             if (rst.next()) {
                 if (calendarName.equalsIgnoreCase(tableName)) {
-                    CrudUtil.execute(
+                    SQLUtil.execute(
                             "UPDATE " + tableName + " SET title = ?, location = ?, full_day = ?, from_date = ?, to_date = ?, repeat_type = ? WHERE " + idColumn + " = ?",
                             entry.getTitle(),
                             entry.getLocation(),
@@ -44,7 +44,7 @@ public class CalendarDAOImpl implements CalendarDAO {
                     );
                     foundInOldTable = true;
                 } else {
-                    CrudUtil.execute("DELETE FROM " + tableName + " WHERE " + idColumn + " = ?", entryId);
+                    SQLUtil.execute("DELETE FROM " + tableName + " WHERE " + idColumn + " = ?", entryId);
                 }
             }
         }
@@ -55,7 +55,7 @@ public class CalendarDAOImpl implements CalendarDAO {
                 if (calendarName.equalsIgnoreCase(calendarTableNames[i]) ||
                         (calendarName.equalsIgnoreCase("Study Session") && calendarTableNames[i].equalsIgnoreCase("study_session"))) {
 
-                    CrudUtil.execute(
+                    SQLUtil.execute(
                             "INSERT INTO " + calendarTableNames[i] + " VALUES (?, ?, ?, ?, ?, ?, ?)",
                             entryId,
                             entry.getTitle(),
@@ -96,7 +96,7 @@ public class CalendarDAOImpl implements CalendarDAO {
     @Override
     public ArrayList<Entry<?>> getEntriesFromTable(String tableName) throws SQLException {
         ArrayList<Entry<?>> entries = new ArrayList<>();
-        try (ResultSet rst = CrudUtil.execute("SELECT * FROM " + tableName)) {
+        try (ResultSet rst = SQLUtil.execute("SELECT * FROM " + tableName)) {
             while (rst.next()) {
                 Entry<?> entry = new Entry<>();
                 entry.setId(rst.getString(1));
@@ -135,17 +135,17 @@ public class CalendarDAOImpl implements CalendarDAO {
         } else {
             idColumn = "id";
         }
-        return CrudUtil.execute("DELETE FROM " + actualTableName +" WHERE " + idColumn + " = ?", id);
+        return SQLUtil.execute("DELETE FROM " + actualTableName +" WHERE " + idColumn + " = ?", id);
     }
 
     @Override
     public boolean syncEntryByAi(String query) throws SQLException {
-        return CrudUtil.execute(query);
+        return SQLUtil.execute(query);
     }
 
     @Override
     public String getAllFutureEntries(String tableName) throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT COUNT(*) FROM " + tableName + " WHERE to_date > CURRENT_DATE");
+        ResultSet rst = SQLUtil.execute("SELECT COUNT(*) FROM " + tableName + " WHERE to_date > CURRENT_DATE");
         while (rst.next()){
             return rst.getString(1);
         }

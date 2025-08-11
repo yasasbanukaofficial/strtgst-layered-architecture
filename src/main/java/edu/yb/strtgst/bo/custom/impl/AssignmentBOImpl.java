@@ -4,14 +4,12 @@ import edu.yb.strtgst.bo.BOFactory;
 import edu.yb.strtgst.bo.custom.AssignmentBO;
 import edu.yb.strtgst.bo.custom.SubjectBO;
 import edu.yb.strtgst.dao.DAOFactory;
-import edu.yb.strtgst.dao.custom.AcademicDAO;
 import edu.yb.strtgst.dao.custom.AssignmentDAO;
-import edu.yb.strtgst.dao.custom.impl.AssignmentDAOImpl;
 import edu.yb.strtgst.db.DBConnection;
 import edu.yb.strtgst.dto.AssignmentDto;
 import edu.yb.strtgst.entity.Assignment;
 import edu.yb.strtgst.util.AlertUtil;
-import edu.yb.strtgst.util.CrudUtil;
+import edu.yb.strtgst.dao.SQLUtil;
 import edu.yb.strtgst.util.IdLoader;
 
 import java.sql.Connection;
@@ -84,7 +82,7 @@ public class AssignmentBOImpl implements AssignmentBO {
         try {
             connection.setAutoCommit(false);
 
-            ResultSet assignmentRst = CrudUtil.execute("SELECT * FROM Assignment WHERE assignment_id = ?", assignmentId);
+            ResultSet assignmentRst = SQLUtil.execute("SELECT * FROM Assignment WHERE assignment_id = ?", assignmentId);
             if (!assignmentRst.next()) {
                 connection.rollback();
                 return false;
@@ -99,13 +97,13 @@ public class AssignmentBOImpl implements AssignmentBO {
                 return false;
             }
 
-            boolean isSubjectUpdated = CrudUtil.execute(
+            boolean isSubjectUpdated = SQLUtil.execute(
                     "UPDATE Subject SET total_marks = total_marks - ? WHERE sub_id = ?",
                     assignmentMarks, subId
             );
 
             if (isSubjectUpdated) {
-                ResultSet gradeRst = CrudUtil.execute("SELECT marks FROM GRADE WHERE sub_id = ?", subId);
+                ResultSet gradeRst = SQLUtil.execute("SELECT marks FROM GRADE WHERE sub_id = ?", subId);
                 if (gradeRst.next()) {
                     int currentMarks = gradeRst.getInt("marks");
                     int newMarks = currentMarks - Integer.parseInt(assignmentMarks);
@@ -115,13 +113,13 @@ public class AssignmentBOImpl implements AssignmentBO {
                     String grade = (newMarks >= 75) ? "A" : (newMarks >= 65) ? "B" :
                             (newMarks >= 55) ? "C" : (newMarks >= 45) ? "D" : "F";
 
-                    boolean isGradeUpdated = CrudUtil.execute(
+                    boolean isGradeUpdated = SQLUtil.execute(
                             "UPDATE Grade SET marks = ?, grade = ? WHERE sub_id = ?",
                             newMarks, grade, subId
                     );
 
                     if (isGradeUpdated) {
-                        boolean isAssignmentDeleted = CrudUtil.execute(
+                        boolean isAssignmentDeleted = SQLUtil.execute(
                                 "DELETE FROM Assignment WHERE assignment_id = ?",
                                 assignmentId
                         );
@@ -168,7 +166,7 @@ public class AssignmentBOImpl implements AssignmentBO {
         try {
             connection.setAutoCommit(false);
 
-            ResultSet existingAssignment = CrudUtil.execute(
+            ResultSet existingAssignment = SQLUtil.execute(
                     "SELECT * FROM Assignment WHERE assignment_id = ?",
                     assignmentDto.getAssignmentId()
             );
@@ -182,7 +180,7 @@ public class AssignmentBOImpl implements AssignmentBO {
             String oldMarks = existingAssignment.getString("assignment_marks");
             String oldStatus = existingAssignment.getString("assignment_status");
 
-            boolean isUpdated = CrudUtil.execute(
+            boolean isUpdated = SQLUtil.execute(
                     "UPDATE Assignment SET assignment_name = ?, assignment_description = ?, assignment_marks = ?, sub_name = ?, due_date = ?, assignment_status = ? WHERE assignment_id = ?",
                     assignmentDto.getAssignmentName(),
                     assignmentDto.getAssignmentDescription(),
@@ -203,12 +201,12 @@ public class AssignmentBOImpl implements AssignmentBO {
 
             if (!oldSubName.equals(assignmentDto.getSubName())) {
                 if ("Completed".equals(oldStatus)) {
-                    CrudUtil.execute(
+                    SQLUtil.execute(
                             "UPDATE Subject SET total_marks = total_marks - ? WHERE sub_id = ?",
                             oldMarks, oldSubId
                     );
 
-                    ResultSet oldGradeRst = CrudUtil.execute("SELECT marks FROM GRADE WHERE sub_id = ?", oldSubId);
+                    ResultSet oldGradeRst = SQLUtil.execute("SELECT marks FROM GRADE WHERE sub_id = ?", oldSubId);
                     if (oldGradeRst.next()) {
                         int currentMarks = oldGradeRst.getInt("marks");
                         int newMarks = currentMarks - Integer.parseInt(oldMarks);
@@ -217,7 +215,7 @@ public class AssignmentBOImpl implements AssignmentBO {
                         String grade = (newMarks >= 75) ? "A" : (newMarks >= 65) ? "B" :
                                 (newMarks >= 55) ? "C" : (newMarks >= 45) ? "D" : "F";
 
-                        CrudUtil.execute(
+                        SQLUtil.execute(
                                 "UPDATE Grade SET marks = ?, grade = ? WHERE sub_id = ?",
                                 newMarks, grade, oldSubId
                         );
@@ -225,7 +223,7 @@ public class AssignmentBOImpl implements AssignmentBO {
                 }
 
                 if ("Completed".equals(assignmentDto.getAssignmentStatus())) {
-                    boolean subMarksUpdated = CrudUtil.execute(
+                    boolean subMarksUpdated = SQLUtil.execute(
                             "UPDATE Subject SET total_marks = total_marks + ? WHERE sub_id = ?",
                             assignmentDto.getAssignmentMarks(), newSubId
                     );
@@ -243,12 +241,12 @@ public class AssignmentBOImpl implements AssignmentBO {
                 }
             } else {
                 if ("Completed".equals(oldStatus) && !"Completed".equals(assignmentDto.getAssignmentStatus())) {
-                    CrudUtil.execute(
+                    SQLUtil.execute(
                             "UPDATE Subject SET total_marks = total_marks - ? WHERE sub_id = ?",
                             oldMarks, oldSubId
                     );
 
-                    ResultSet gradeRst = CrudUtil.execute("SELECT marks FROM GRADE WHERE sub_id = ?", oldSubId);
+                    ResultSet gradeRst = SQLUtil.execute("SELECT marks FROM GRADE WHERE sub_id = ?", oldSubId);
                     if (gradeRst.next()) {
                         int currentMarks = gradeRst.getInt("marks");
                         int newMarks = currentMarks - Integer.parseInt(oldMarks);
@@ -257,14 +255,14 @@ public class AssignmentBOImpl implements AssignmentBO {
                         String grade = (newMarks >= 75) ? "A" : (newMarks >= 65) ? "B" :
                                 (newMarks >= 55) ? "C" : (newMarks >= 45) ? "D" : "F";
 
-                        CrudUtil.execute(
+                        SQLUtil.execute(
                                 "UPDATE Grade SET marks = ?, grade = ? WHERE sub_id = ?",
                                 newMarks, grade, oldSubId
                         );
                     }
                 }
                 else if (!"Completed".equals(oldStatus) && "Completed".equals(assignmentDto.getAssignmentStatus())) {
-                    CrudUtil.execute(
+                    SQLUtil.execute(
                             "UPDATE Subject SET total_marks = total_marks + ? WHERE sub_id = ?",
                             assignmentDto.getAssignmentMarks(), oldSubId
                     );
@@ -275,12 +273,12 @@ public class AssignmentBOImpl implements AssignmentBO {
                         && !oldMarks.equals(assignmentDto.getAssignmentMarks())) {
                     int marksDifference = Integer.parseInt(assignmentDto.getAssignmentMarks()) - Integer.parseInt(oldMarks);
 
-                    CrudUtil.execute(
+                    SQLUtil.execute(
                             "UPDATE Subject SET total_marks = total_marks + ? WHERE sub_id = ?",
                             String.valueOf(marksDifference), oldSubId
                     );
 
-                    ResultSet gradeRst = CrudUtil.execute("SELECT marks FROM GRADE WHERE sub_id = ?", oldSubId);
+                    ResultSet gradeRst = SQLUtil.execute("SELECT marks FROM GRADE WHERE sub_id = ?", oldSubId);
                     if (gradeRst.next()) {
                         int currentMarks = gradeRst.getInt("marks");
                         int newMarks = currentMarks + marksDifference;
@@ -289,7 +287,7 @@ public class AssignmentBOImpl implements AssignmentBO {
                         String grade = (newMarks >= 75) ? "A" : (newMarks >= 65) ? "B" :
                                 (newMarks >= 55) ? "C" : (newMarks >= 45) ? "D" : "F";
 
-                        CrudUtil.execute(
+                        SQLUtil.execute(
                                 "UPDATE Grade SET marks = ?, grade = ? WHERE sub_id = ?",
                                 newMarks, grade, oldSubId
                         );
@@ -322,7 +320,7 @@ public class AssignmentBOImpl implements AssignmentBO {
         try {
             connection.setAutoCommit(false);
 
-            ResultSet assignmentRst = CrudUtil.execute(
+            ResultSet assignmentRst = SQLUtil.execute(
                     "SELECT * FROM Assignment WHERE assignment_id = ?",
                     assignmentId
             );
@@ -341,7 +339,7 @@ public class AssignmentBOImpl implements AssignmentBO {
                 return true;
             }
 
-            boolean statusUpdated = CrudUtil.execute(
+            boolean statusUpdated = SQLUtil.execute(
                     "UPDATE Assignment SET assignment_status = ? WHERE assignment_id = ?",
                     newStatus, assignmentId
             );
@@ -358,7 +356,7 @@ public class AssignmentBOImpl implements AssignmentBO {
             }
 
             if (!"Completed".equals(oldStatus) && "Completed".equals(newStatus) && !"Overdue".equals(newStatus)) {
-                boolean subjectUpdated = CrudUtil.execute(
+                boolean subjectUpdated = SQLUtil.execute(
                         "UPDATE Subject SET total_marks = total_marks + ? WHERE sub_id = ?",
                         assignmentMarks, subId
                 );
@@ -375,13 +373,13 @@ public class AssignmentBOImpl implements AssignmentBO {
                 }
             }
             else if ("Completed".equals(oldStatus) && !"Completed".equals(newStatus)) {
-                boolean subjectUpdated = CrudUtil.execute(
+                boolean subjectUpdated = SQLUtil.execute(
                         "UPDATE Subject SET total_marks = total_marks - ? WHERE sub_id = ?",
                         assignmentMarks, subId
                 );
 
                 if (subjectUpdated) {
-                    ResultSet gradeRst = CrudUtil.execute("SELECT marks FROM GRADE WHERE sub_id = ?", subId);
+                    ResultSet gradeRst = SQLUtil.execute("SELECT marks FROM GRADE WHERE sub_id = ?", subId);
                     if (gradeRst.next()) {
                         int currentMarks = gradeRst.getInt("marks");
                         int newMarks = currentMarks - Integer.parseInt(assignmentMarks);
@@ -390,7 +388,7 @@ public class AssignmentBOImpl implements AssignmentBO {
                         String grade = (newMarks >= 75) ? "A" : (newMarks >= 65) ? "B" :
                                 (newMarks >= 55) ? "C" : (newMarks >= 45) ? "D" : "F";
 
-                        boolean gradeUpdated = CrudUtil.execute(
+                        boolean gradeUpdated = SQLUtil.execute(
                                 "UPDATE Grade SET marks = ?, grade = ? WHERE sub_id = ?",
                                 newMarks, grade, subId
                         );

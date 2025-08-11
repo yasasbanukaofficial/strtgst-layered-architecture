@@ -2,7 +2,7 @@ package edu.yb.strtgst.dao.custom.impl;
 
 import edu.yb.strtgst.dao.custom.AssignmentDAO;
 import edu.yb.strtgst.entity.Assignment;
-import edu.yb.strtgst.util.CrudUtil;
+import edu.yb.strtgst.dao.SQLUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ public class AssignmentDAOImpl implements AssignmentDAO {
 
     @Override
     public boolean addEntity(Assignment assignment) throws SQLException {
-        return CrudUtil.execute(
+        return SQLUtil.execute(
                 "INSERT INTO Assignment VALUES (?, ?, ?, ?, ?, ?, ?)",
                 assignment.getAssignmentId(),
                 assignment.getAssignmentName(),
@@ -36,13 +36,13 @@ public class AssignmentDAOImpl implements AssignmentDAO {
 
     @Override
     public String fetchExistingID(String subjectName) throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Subject WHERE sub_name = ?", subjectName);
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Subject WHERE sub_name = ?", subjectName);
         return rst.next() ? rst.getString(1) : null;
     }
 
     @Override
     public ArrayList<Assignment> getAll() throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Assignment");
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Assignment");
 
         ArrayList<Assignment> assignments = new ArrayList<>();
         while (rst.next()) {
@@ -68,7 +68,7 @@ public class AssignmentDAOImpl implements AssignmentDAO {
 
     @Override
     public ArrayList<ArrayList> getAllAssignmentStatus() throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT assignment_status, due_date, assignment_id FROM Assignment");
+        ResultSet rst = SQLUtil.execute("SELECT assignment_status, due_date, assignment_id FROM Assignment");
         ArrayList<ArrayList> list = new ArrayList<>();
 
         while (rst.next()) {
@@ -83,7 +83,7 @@ public class AssignmentDAOImpl implements AssignmentDAO {
 
     @Override
     public String getPendingOrOverdueAssignmentCount() throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT COUNT(*) FROM Assignment WHERE assignment_status = 'Pending' OR assignment_status = 'Overdue'");
+        ResultSet rst = SQLUtil.execute("SELECT COUNT(*) FROM Assignment WHERE assignment_status = 'Pending' OR assignment_status = 'Overdue'");
         while (rst.next()){
             return rst.getString(1);
         }

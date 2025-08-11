@@ -2,9 +2,7 @@ package edu.yb.strtgst.dao.custom;
 
 import com.calendarfx.model.Entry;
 import edu.yb.strtgst.dao.CrudDAO;
-import edu.yb.strtgst.util.CrudUtil;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
